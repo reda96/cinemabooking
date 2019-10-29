@@ -1,12 +1,12 @@
 import React from "react";
 import Layout from "./components/Layout/Layout";
 import "./App.css";
-
+import PlusIcon from "./components/PlusIcon/PLusIcon";
 function App() {
   return (
     <div>
       <Layout>
-        <h1>Hello World!</h1>>
+        <PlusIcon />
       </Layout>
     </div>
   );

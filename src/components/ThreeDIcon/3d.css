@@ -1,0 +1,11 @@
+.icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 5px;
+  background-color: #43a5b0;
+  color: bisque;
+  margin: auto;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 45px;
+}
