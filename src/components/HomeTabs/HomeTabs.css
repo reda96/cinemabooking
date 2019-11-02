@@ -1,0 +1,29 @@
+.tabs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  flex-flow: column;
+}
+
+.tab {
+  margin: 10px 0;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  align-items: center;
+}
+.tab a {
+  color: #8f5c2c;
+  text-decoration: none;
+  width: 100%;
+  box-sizing: border-box;
+  display: block;
+}
+.tab a:hover,
+.tab a:active,
+.tab a.active {
+  color: #40a4c8;
+}
