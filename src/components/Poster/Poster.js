@@ -5,7 +5,7 @@ const poster = props => (
   <div>
     <img
       src={picture}
-      style={{ width: "auto", height: "auto" }}
+      style={{ width: "350px", height: "auto" }}
       alt="filmPoster"
     />
   </div>

@@ -15,7 +15,7 @@
   grid-template-rows: auto;
   justify-content: center;
   align-items: center;
-  padding: 50px;
+  /* padding: 50px; */
 }
 .gridItem {
   font-size: 0px;
@@ -44,4 +44,66 @@
   .gridContainer {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
+}
+
+.main {
+  height: 150px;
+  background-position: inherit;
+  background-repeat: no-repeat;
+}
+
+.navbar {
+  padding: 35px;
+}
+ul {
+  list-style-type: none;
+  box-shadow: 0 2px 4px 0;
+
+  margin: 0px;
+  padding: 0;
+  height: 150px;
+  overflow: hidden;
+  background-color: #fff;
+}
+.facebook {
+  color: #3b5998;
+}
+.instgram {
+  color: #d8307b;
+}
+.twitter {
+  color: #55acee;
+}
+.youtube {
+  color: #ff0000;
+}
+.FontAwesomeIcon {
+  height: 30px;
+  margin: 10px;
+  font-size: 40px;
+}
+.social {
+  float: right;
+  margin-right: 30px;
+}
+li {
+  float: right;
+}
+
+li a {
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+
+  cursor: pointer;
+  color: #111;
+  text-transform: uppercase;
+  font-family: FSAlbert, Cairo;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+li a:hover {
+  background-color: #d2d2d2;
 }
