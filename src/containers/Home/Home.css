@@ -1,5 +1,5 @@
 .row {
-  margin: 0 auto;
+  margin: 30px auto;
   max-width: 62.5rem;
   width: 100%;
 }
@@ -15,7 +15,6 @@
   grid-template-rows: auto;
   justify-content: center;
   align-items: center;
-  /* padding: 50px; */
 }
 .gridItem {
   font-size: 0px;
@@ -57,12 +56,9 @@
 }
 ul {
   list-style-type: none;
-  box-shadow: 0 2px 4px 0;
 
   margin: 0px;
   padding: 0;
-  height: 150px;
-  overflow: hidden;
   background-color: #fff;
 }
 .facebook {
@@ -81,6 +77,7 @@ ul {
   height: 30px;
   margin: 10px;
   font-size: 40px;
+  cursor: pointer;
 }
 .social {
   float: right;
@@ -106,4 +103,27 @@ li a {
 
 li a:hover {
   background-color: #d2d2d2;
+}
+
+.Input {
+  width: 100%;
+  /* padding: 10px; */
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.InputElement {
+  outline: none;
+  border: 1px solid #ccc;
+  background-color: white;
+  font: inherit;
+  padding: 6px 10px;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+.InputElement:focus {
+  outline: none;
+  background-color: #ccc;
 }
