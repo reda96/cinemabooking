@@ -7,11 +7,13 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import Modal from "../../components/UI/Model/Model";
+import LOGIN from "../Auth/LogIn";
 library.add(fab, faSearch);
 class Home extends Component {
   state = {
     filmsList: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }],
-    showSearchBar: false
+    showSearchBar: false,
+    showLogInForm: false
   };
   render() {
     let searchBar = (
@@ -28,9 +30,8 @@ class Home extends Component {
         />
       </div>
     );
-    if (!this.state.showSearchBar) {
-      searchBar = null;
-    }
+    let logInForm = <LOGIN />;
+
     return (
       <Auxiliary>
         <div className={classes.main}>
@@ -77,8 +78,8 @@ class Home extends Component {
                   Home
                 </a>
               </li>
-              <li>
-                <a href="#news">LOGIN</a>
+              <li onClick={() => this.setState({ showLogInForm: true })}>
+                <a href="#login">LOGIN</a>
               </li>
               <li>
                 <a href="#about">About</a>
@@ -89,6 +90,12 @@ class Home extends Component {
               clicked={() => this.setState({ showSearchBar: false })}
             >
               {searchBar}
+            </Modal>
+            <Modal
+              show={this.state.showLogInForm}
+              clicked={() => this.setState({ showLogInForm: false })}
+            >
+              {logInForm}
             </Modal>
           </div>
         </div>

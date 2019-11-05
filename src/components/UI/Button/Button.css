@@ -1,0 +1,31 @@
+.Button {
+  border-radius: 3px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font: inherit;
+  padding: 10px;
+  margin: 10px;
+
+  font-weight: bold;
+}
+.Submit {
+  background-color: #5c9210;
+  color: #fff;
+}
+.Register {
+  background-color: #fff;
+  color: #5c9210;
+  border-color: #5c9210;
+}
+.Button:first-of-type {
+  margin-left: 0;
+  padding-left: 0;
+}
+.Button:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.Danger {
+  color: #944317;
+}

@@ -1,7 +1,13 @@
 .Input {
   width: 100%;
+
   padding: 10px;
   box-sizing: border-box;
+
+  border-color: lightslategrey;
+}
+.Input :focus {
+  border-color: rgb(102, 128, 245);
 }
 .Label {
   font-weight: bold;
@@ -11,7 +17,8 @@
 .InputElement {
   outline: none;
   border: 1px solid #ccc;
-  background-color: white;
+  border-color: lightslategrey;
+  border-radius: 3px;
   font: inherit;
   padding: 6px 10px;
   display: block;
