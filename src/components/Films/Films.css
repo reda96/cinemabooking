@@ -1,0 +1,42 @@
+.wholePage {
+  /* background-color: #d9d9d9; */
+}
+.devSplit {
+  display: inline-block;
+
+  /* float: left; */
+}
+.FontAwesomeIcon {
+  display: block;
+  height: 50px;
+  margin-left: 15px;
+  color: #fff;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.gridContainer {
+  display: grid;
+  float: none;
+  grid-template-columns: 450px 600px;
+  /* max-width: 500; */
+  grid-template-rows: 505px;
+  justify-content: center;
+  z-index: 500;
+  height: 500px;
+  /* align-items: center; */
+  /* background-color: white; */
+}
+.gridItem {
+  /* padding-left: 20px; */
+  background-color: white;
+}
+body {
+  font-family: "Open Sans", serif;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}

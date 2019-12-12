@@ -5,8 +5,10 @@
   font: inherit;
   padding: 10px;
   margin: 10px;
-
-  font-weight: bold;
+}
+.Black {
+  background-color: #30373d;
+  color: #ffffff;
 }
 .Submit {
   background-color: #5c9210;
@@ -17,10 +19,10 @@
   color: #5c9210;
   border-color: #5c9210;
 }
-.Button:first-of-type {
+/* .Button:first-of-type {
   margin-left: 0;
   padding-left: 0;
-}
+} */
 .Button:disabled {
   color: #ccc;
   cursor: not-allowed;

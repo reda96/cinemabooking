@@ -7,6 +7,7 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import Modal from "../../components/UI/Model/Model";
+import Films from "../../components/Films/Films";
 import LOGIN from "../Auth/LogIn";
 library.add(fab, faSearch);
 class Home extends Component {
@@ -14,6 +15,7 @@ class Home extends Component {
     filmsList: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }],
     showSearchBar: false,
     showLogInForm: false
+    // selectedFilm
   };
   render() {
     let searchBar = (
@@ -100,7 +102,8 @@ class Home extends Component {
           </div>
         </div>
 
-        <div style={{ backgroundColor: "#383838" }}>
+        <div style={{ backgroundColor: "#383838", paddingTop: "20px" }}>
+          <Films />
           <div className={`${classes.Limits} ${classes.row} `}>
             <div className={classes.gridContainer}>
               {this.state.filmsList.map(film => (

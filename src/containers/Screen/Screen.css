@@ -1,0 +1,96 @@
+.row {
+  margin: 0 auto;
+  max-width: 1000px;
+  width: 100%;
+}
+.screenText {
+  width: 70%;
+  background-color: #25a9df;
+  color: #ffffff;
+  padding: 5px;
+  border: 0px solid #aaaaaa;
+  margin: 0px auto;
+  margin-bottom: 30px;
+  font-size: 20px;
+  text-align: center;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom: 4px solid #1b88b5;
+}
+.Screen {
+  background-color: #f6f6f6;
+  height: 800px;
+  display: block;
+}
+.seatingMessage {
+  background-color: #ffa500;
+  height: 100px;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.seatingSamples {
+  background-color: #fff;
+  height: 70px;
+}
+.seatingSample {
+  width: 25px;
+  height: 25px;
+  border-radius: 2px;
+  border: 1px solid;
+  display: inline-block;
+  margin-right: 5px;
+}
+.list {
+  list-style: none;
+  text-align: center !important;
+  padding: 20px;
+  padding-right: 300px;
+}
+.available {
+  border: 1px solid #25a9df;
+  background-color: #ffffff;
+  color: #333333;
+  cursor: pointer;
+}
+.available:hover {
+  background-color: #999;
+}
+.yourSeat {
+  border-color: #25a9df;
+  background-color: #25a9df;
+}
+.unavailable {
+  background-color: #dddddd;
+  border-color: #dddddd;
+}
+li {
+  margin-right: 10px;
+}
+.bookingRow {
+  width: 70%;
+  margin-left: 15%;
+  height: 30px;
+}
+.singleBookingRow {
+  border-bottom: 1px dashed #ddd;
+  position: relative;
+}
+.seat {
+  margin-left: 6px;
+  /* float: left; */
+
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  font-size: 17px;
+  text-align: center;
+  font-family: "Lucida Console", Courier, monospace;
+  /* line-height: 9px; */
+
+  border-radius: 3px;
+}
+.rowKey {
+  color: #777777;
+  border: 1px solid transparent;
+}

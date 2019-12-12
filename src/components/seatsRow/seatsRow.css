@@ -1,0 +1,31 @@
+.available {
+  border: 1px solid #25a9df;
+  background-color: #ffffff;
+  color: #333333;
+  cursor: pointer;
+}
+.available:hover {
+  background-color: #999;
+}
+.yourSeat {
+  border-color: #25a9df;
+  background-color: #25a9df;
+}
+.unavailable {
+  background-color: #dddddd;
+  border-color: #dddddd;
+}
+.seat {
+  margin-left: 6px;
+  /* float: left; */
+
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  font-size: 17px;
+  text-align: center;
+  font-family: "Lucida Console", Courier, monospace;
+  /* line-height: 9px; */
+
+  border-radius: 3px;
+}
