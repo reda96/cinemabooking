@@ -9,10 +9,8 @@ import {
   faChevronLeft,
   faPlay,
   faPlus,
-  faMoneyCheckAlt,
   faMoneyBill
 } from "@fortawesome/free-solid-svg-icons";
-import { library } from "@fortawesome/fontawesome-svg-core";
 class Films extends Component {
   state = {
     films: [
@@ -55,103 +53,107 @@ class Films extends Component {
       <Auxiliary>
         <div className={classes.gridContainer}>
           <div className={classes.gridItem}>
-            <Poster />
+            <Poster width="350px" height="505px" />
           </div>
+
           <div className={classes.gridItem}>
-            <div className={classes.devSplit}>
-              <div className={classes.devSplit} style={{ width: "400px" }}>
-                <h2>{this.state.films[0].name}</h2>
-                {`${this.state.films[0].type} | ${this.state.films[0].duration}`}
-                {this.state.films[0].actors}
-              </div>
-              <div className={classes.devSplit}>
-                <div
-                  style={{
-                    backgroundColor: "rgb(56, 56, 56)",
-                    width: "50px",
-                    marginLeft: "110px"
-                  }}
-                >
-                  <FontAwesomeIcon
-                    className={classes.FontAwesomeIcon}
-                    icon={faChevronRight}
-                  />
-                </div>
-                <div
-                  style={{
-                    backgroundColor: "rgb(56, 56, 56)",
-                    width: "50px",
-                    marginLeft: "110px",
-                    marginTop: "10px"
-                  }}
-                >
-                  <FontAwesomeIcon
-                    className={classes.FontAwesomeIcon}
-                    icon={faChevronLeft}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <p className={classes.devSplit}>
-              {this.state.films[0].description}
-            </p>
             <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "25% 25% 25% 25%"
-              }}
+              className={classes.devSplit}
+              style={{ width: "50px", float: "right", marginRight: "30px" }}
             >
-              <div style={{ lineHeight: 0.3 }}>
-                3:00 <br />
-                <p style={{ color: "#777777" }}>120.0 EGP </p>
+              <div
+                style={{
+                  backgroundColor: "rgb(56, 56, 56)",
+                  width: "50px"
+                }}
+              >
+                <FontAwesomeIcon
+                  className={classes.FontAwesomeIcon}
+                  icon={faChevronRight}
+                />
               </div>
-              <div style={{ lineHeight: 0.3 }}>
-                6:00 <br />
-                <p style={{ color: "#777777" }}>120.0 EGP </p>
-              </div>
-              <div style={{ lineHeight: 0.3 }}>
-                9:00 <br />
-                <p style={{ color: "#777777" }}>150.0 EGP </p>
-              </div>
-              <div style={{ lineHeight: 0.3 }}>
-                12:00 <br />
-                <p style={{ color: "#777777" }}>150.0 EGP </p>
+              <div
+                style={{
+                  backgroundColor: "rgb(56, 56, 56)",
+                  width: "50px"
+                }}
+              >
+                <FontAwesomeIcon
+                  className={classes.FontAwesomeIcon}
+                  icon={faChevronLeft}
+                />
               </div>
             </div>
-            <div className={classes.gridItem}>
-              <div style={{ float: "right" }}>
-                <Button
-                  btnType="Black"
-                  style={{
-                    height: "40px",
-                    width: "120px",
-                    lineHeight: "normal"
-                  }}
-                >
-                  <FontAwesomeIcon icon={faPlay} /> Play
-                </Button>
-                <Button
-                  btnType="Black"
-                  style={{
-                    height: "40px",
-                    width: "120px",
-                    lineHeight: "normal"
-                  }}
-                >
-                  <FontAwesomeIcon icon={faPlus} /> More..
-                </Button>
+            <div style={{ marginLeft: "20px" }}>
+              <div className={classes.devSplit}>
+                <div className={classes.devSplit} style={{ width: "400px" }}>
+                  <h2>{this.state.films[0].name}</h2>
+                  {`${this.state.films[0].type} | ${this.state.films[0].duration}`}
+                </div>
 
-                <Button
-                  style={{
-                    height: "40px",
-                    width: "120px",
-                    lineHeight: "normal"
-                  }}
-                  btnType="Black"
-                >
-                  <FontAwesomeIcon icon={faMoneyBill} /> BUY
-                </Button>
+                <div>{this.state.films[0].actors}</div>
+              </div>
+
+              <p className={classes.devSplit}>
+                {this.state.films[0].description}
+              </p>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "25% 25% 25% 25%"
+                }}
+              >
+                <div style={{ lineHeight: 0.3 }}>
+                  3:00 <br />
+                  <p style={{ color: "#777777" }}>120.0 EGP </p>
+                </div>
+                <div style={{ lineHeight: 0.3 }}>
+                  6:00 <br />
+                  <p style={{ color: "#777777" }}>120.0 EGP </p>
+                </div>
+                <div style={{ lineHeight: 0.3 }}>
+                  9:00 <br />
+                  <p style={{ color: "#777777" }}>150.0 EGP </p>
+                </div>
+                <div style={{ lineHeight: 0.3 }}>
+                  12:00 <br />
+                  <p style={{ color: "#777777" }}>150.0 EGP </p>
+                </div>
+              </div>
+              <div className={classes.gridItem}>
+                <div style={{ float: "right" }}>
+                  <Button
+                    btnType="Black"
+                    style={{
+                      height: "40px",
+                      width: "120px",
+                      lineHeight: "normal"
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faPlay} /> Play
+                  </Button>
+                  <Button
+                    btnType="Black"
+                    style={{
+                      height: "40px",
+                      width: "120px",
+                      lineHeight: "normal"
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faPlus} /> More..
+                  </Button>
+
+                  <Button
+                    style={{
+                      height: "40px",
+                      width: "120px",
+                      lineHeight: "normal"
+                    }}
+                    btnType="Black"
+                  >
+                    <FontAwesomeIcon icon={faMoneyBill} /> BUY
+                  </Button>
+                </div>
               </div>
             </div>
           </div>

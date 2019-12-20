@@ -3,6 +3,7 @@ import Layout from "./components/Layout/Layout";
 import "./App.css";
 import Home from "./containers/Home/Home";
 import Screen from "./containers/Screen/Screen";
+import BookingDetails from "./containers/BookingDeatails/BookingDetails";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Layout>
         <Home />
         {/* <Screen /> */}
+        {/* <BookingDetails /> */}
       </Layout>
     </div>
   );

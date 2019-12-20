@@ -6,8 +6,8 @@ const poster = props => (
     <img
       src={picture}
       style={{
-        width: "380px",
-        height: "auto",
+        width: props.width,
+        height: props.height,
         zIndex: 500,
         cursor: "pointer"
       }}

@@ -5,6 +5,7 @@
   font: inherit;
   padding: 10px;
   margin: 10px;
+  outline: 0;
 }
 .Black {
   background-color: #30373d;

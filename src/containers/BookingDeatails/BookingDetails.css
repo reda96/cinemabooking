@@ -1,0 +1,45 @@
+.container {
+  background-color: white;
+}
+.gridContainer {
+  display: grid;
+  grid-template-columns: 225px 40px 460px;
+  /* max-width: 500; */
+  grid-template-rows: 350px;
+  justify-content: center;
+  margin-top: 100px;
+  z-index: 500;
+  height: 350px;
+  /* align-items: center; */
+  /* background-color: white; */
+}
+.gridItem {
+  margin-left: 40px;
+}
+.FontAwesomeIcon {
+  color: #999999;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 22px;
+}
+.Select {
+  height: auto;
+  padding: 15px;
+  width: 200px;
+  margin-bottom: 12px;
+}
+.Next {
+  background-color: #f39c11;
+  color: white;
+  float: right;
+  margin-right: 300px;
+  border-color: #df8d0b;
+  border-style: solid;
+}
+.Next:hover {
+  background-color: #ad6608;
+}
+.Next {
+  border-color: #df8d0b;
+}

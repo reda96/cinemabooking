@@ -108,7 +108,7 @@ class Home extends Component {
             <div className={classes.gridContainer}>
               {this.state.filmsList.map(film => (
                 <div key={film.id} className={classes.gridItem}>
-                  <Poster />
+                  <Poster width="300px" height="450px" />
                 </div>
               ))}
             </div>
