@@ -6,49 +6,117 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../components/UI/Button/Button";
 import {
   faChevronRight,
-  faChevronLeft,
   faPlay,
+  faChevronLeft,
   faPlus,
   faMoneyBill
 } from "@fortawesome/free-solid-svg-icons";
 class Films extends Component {
   state = {
-    films: [
-      {
-        img: "http://photo.elcinema.com.s3.amazonaws.com/uplo...",
-        name: "Terminator: Dark Fate",
-        rating: 7,
-        type: "Science Fiction, Adventure, Action",
-        duration: "134 min",
-        actors: [
-          "Arnold Schwarzenegger",
-          "Linda Hamilton",
-          "Mackenzie Davis",
-          "Brett Azar"
-        ],
-        description:
-          "In this direct sequel to Terminator 2: Judgment Day, and two decades after its last events, Sarah Connor’s mission is to protect a young woman called Dani Ramos and her friends from the deadly plan of a liquid metal terminator who has arrived from the future by Skynet especially for them. Sarah also recruits the original Terminator to come to their aid for a fight for the future.",
-        prices: [{ time: "00:45", price: "180.0 EGP" }]
-      },
-      {
-        img: "http://photo.elcinema.com.s3.amazonaws.com/uplo...",
-        name: "Terminator: Dark Fate",
-        rating: 7,
-        type: "Science Fiction, Adventure, Action",
-        duration: "134 min",
-        actors: [
-          "Arnold Schwarzenegger",
-          "Linda Hamilton",
-          "Mackenzie Davis",
-          "Brett Azar"
-        ],
-        description:
-          "In this direct sequel to Terminator 2: Judgment Day, and two decades after its last events, Sarah Connor’s mission is to protect a young woman called Dani Ramos and her friends from the deadly plan of a liquid metal terminator who has arrived from the future by Skynet especially for them. Sarah also recruits the original Terminator to come to their aid for a fight for the future.",
-        prices: [{ time: "00:45", price: "180.0 EGP" }]
-      }
-    ]
+    films: [],
+    i: 0
+  };
+  componentDidMount() {
+    const films = [];
+    for (let key in this.props.films) {
+      films.push({ ...this.props.films[key], id: key });
+    }
+    this.setState({ films: films });
+  }
+  handleRightShift = () => {
+    console.log(this.state);
+    if (this.state.i < this.props.films.length - 1) {
+      this.setState({ i: this.state.i + 1 });
+    }
+  };
+  handleLeftShift = () => {
+    console.log(this.state);
+    if (this.state.i > 0) {
+      this.setState({ i: this.state.i - 1 });
+    }
   };
   render() {
+    let film = null;
+
+    if (this.state.films.length > 0) {
+      // console.log(this.state.films[0].name);
+      film = (
+        <div style={{ marginLeft: "20px" }}>
+          <div className={classes.devSplit}>
+            <div className={classes.devSplit} style={{ width: "400px" }}>
+              <h2>{this.state.films[this.state.i].name}</h2>
+              {`${this.state.films[this.state.i].type} | ${
+                this.state.films[this.state.i].duration
+              }`}
+            </div>
+
+            <div>{this.state.films[this.state.i].actors}</div>
+          </div>
+
+          <p className={classes.devSplit}>
+            {this.state.films[this.state.i].description}
+          </p>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "25% 25% 25% 25%"
+            }}
+          >
+            <div style={{ lineHeight: 0.3 }}>
+              3:00 <br />
+              <p style={{ color: "#777777" }}>120.0 EGP </p>
+            </div>
+            <div style={{ lineHeight: 0.3 }}>
+              6:00 <br />
+              <p style={{ color: "#777777" }}>120.0 EGP </p>
+            </div>
+            <div style={{ lineHeight: 0.3 }}>
+              9:00 <br />
+              <p style={{ color: "#777777" }}>150.0 EGP </p>
+            </div>
+            <div style={{ lineHeight: 0.3 }}>
+              12:00 <br />
+              <p style={{ color: "#777777" }}>150.0 EGP </p>
+            </div>
+          </div>
+          <div className={classes.gridItem}>
+            <div style={{ float: "right" }}>
+              <Button
+                btnType="Black"
+                style={{
+                  height: "40px",
+                  width: "120px",
+                  lineHeight: "normal"
+                }}
+              >
+                <FontAwesomeIcon icon={faPlay} /> Play
+              </Button>
+              <Button
+                btnType="Black"
+                style={{
+                  height: "40px",
+                  width: "120px",
+                  lineHeight: "normal"
+                }}
+              >
+                <FontAwesomeIcon icon={faPlus} /> More..
+              </Button>
+
+              <Button
+                style={{
+                  height: "40px",
+                  width: "120px",
+                  lineHeight: "normal"
+                }}
+                btnType="Black"
+              >
+                <FontAwesomeIcon icon={faMoneyBill} /> BUY
+              </Button>
+            </div>
+          </div>
+        </div>
+      );
+    }
     return (
       <Auxiliary>
         <div className={classes.gridContainer}>
@@ -70,6 +138,7 @@ class Films extends Component {
                 <FontAwesomeIcon
                   className={classes.FontAwesomeIcon}
                   icon={faChevronRight}
+                  onClick={() => this.handleRightShift()}
                 />
               </div>
               <div
@@ -81,81 +150,11 @@ class Films extends Component {
                 <FontAwesomeIcon
                   className={classes.FontAwesomeIcon}
                   icon={faChevronLeft}
+                  onClick={() => this.handleLeftShift()}
                 />
               </div>
             </div>
-            <div style={{ marginLeft: "20px" }}>
-              <div className={classes.devSplit}>
-                <div className={classes.devSplit} style={{ width: "400px" }}>
-                  <h2>{this.state.films[0].name}</h2>
-                  {`${this.state.films[0].type} | ${this.state.films[0].duration}`}
-                </div>
-
-                <div>{this.state.films[0].actors}</div>
-              </div>
-
-              <p className={classes.devSplit}>
-                {this.state.films[0].description}
-              </p>
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "25% 25% 25% 25%"
-                }}
-              >
-                <div style={{ lineHeight: 0.3 }}>
-                  3:00 <br />
-                  <p style={{ color: "#777777" }}>120.0 EGP </p>
-                </div>
-                <div style={{ lineHeight: 0.3 }}>
-                  6:00 <br />
-                  <p style={{ color: "#777777" }}>120.0 EGP </p>
-                </div>
-                <div style={{ lineHeight: 0.3 }}>
-                  9:00 <br />
-                  <p style={{ color: "#777777" }}>150.0 EGP </p>
-                </div>
-                <div style={{ lineHeight: 0.3 }}>
-                  12:00 <br />
-                  <p style={{ color: "#777777" }}>150.0 EGP </p>
-                </div>
-              </div>
-              <div className={classes.gridItem}>
-                <div style={{ float: "right" }}>
-                  <Button
-                    btnType="Black"
-                    style={{
-                      height: "40px",
-                      width: "120px",
-                      lineHeight: "normal"
-                    }}
-                  >
-                    <FontAwesomeIcon icon={faPlay} /> Play
-                  </Button>
-                  <Button
-                    btnType="Black"
-                    style={{
-                      height: "40px",
-                      width: "120px",
-                      lineHeight: "normal"
-                    }}
-                  >
-                    <FontAwesomeIcon icon={faPlus} /> More..
-                  </Button>
-
-                  <Button
-                    style={{
-                      height: "40px",
-                      width: "120px",
-                      lineHeight: "normal"
-                    }}
-                    btnType="Black"
-                  >
-                    <FontAwesomeIcon icon={faMoneyBill} /> BUY
-                  </Button>
-                </div>
-              </div>
-            </div>
+            {film}
           </div>
         </div>
       </Auxiliary>

@@ -9,14 +9,62 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import Modal from "../../components/UI/Model/Model";
 import Films from "../../components/Films/Films";
 import LOGIN from "../Auth/LogIn";
+import axios from "../../axios-orders";
 library.add(fab, faSearch);
 class Home extends Component {
   state = {
     filmsList: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }],
     showSearchBar: false,
-    showLogInForm: false
+    showLogInForm: false,
+    films: [
+      {
+        img: "http://photo.elcinema.com.s3.amazonaws.com/uplo...",
+        name: "Terminator: Dark Fate",
+        rating: 7,
+        type: "Science Fiction, Adventure, Action",
+        duration: "134 min",
+        actors: [
+          "Arnold Schwarzenegger",
+          "Linda Hamilton",
+          "Mackenzie Davis",
+          "Brett Azar"
+        ],
+        description:
+          "In this direct sequel to Terminator 2: Judgment Day, and two decades after its last events, Sarah Connor’s mission is to protect a young woman called Dani Ramos and her friends from the deadly plan of a liquid metal terminator who has arrived from the future by Skynet especially for them. Sarah also recruits the original Terminator to come to their aid for a fight for the future.",
+        prices: [{ time: "00:45", price: "180.0 EGP" }]
+      },
+      {
+        img: "http://photo.elcinema.com.s3.amazonaws.com/uplo...",
+        name: "Terminator: Dark Fate",
+        rating: 7,
+        type: "Science Fiction, Adventure, Action",
+        duration: "135 min",
+        actors: [
+          "Arnold Schwarzenegger",
+          "Linda Hamilton",
+          "Mackenzie Davis",
+          "Brett Azar"
+        ],
+        description:
+          "In this direct sequel to Terminator 2: Judgment Day, and two decades after its last events, Sarah Connor’s mission is to protect a young woman called Dani Ramos and her friends from the deadly plan of a liquid metal terminator who has arrived from the future by Skynet especially for them. Sarah also recruits the original Terminator to come to their aid for a fight for the future.",
+        prices: [{ time: "00:45", price: "180.0 EGP" }]
+      }
+    ]
     // selectedFilm
   };
+  componentDidMount() {
+    axios.get("/films.json").then(res => {
+      const films = [];
+      for (let key in res.data) {
+        films.push({ ...res.data[key], id: key });
+      }
+      this.setState({ films: films });
+    });
+
+    // axios.post("/films.json", this.state.film).then(resp => {
+    //   console.log(resp);
+    // });
+  }
   render() {
     let searchBar = (
       <div className={classes.Input}>
@@ -76,9 +124,7 @@ class Home extends Component {
                 </a>
               </li>
               <li>
-                <a class="active" href="#home">
-                  Home
-                </a>
+                <a href="#home">Home</a>
               </li>
               <li onClick={() => this.setState({ showLogInForm: true })}>
                 <a href="#login">LOGIN</a>
@@ -103,7 +149,7 @@ class Home extends Component {
         </div>
 
         <div style={{ backgroundColor: "#383838", paddingTop: "20px" }}>
-          <Films />
+          <Films films={this.state.films} />;
           <div className={`${classes.Limits} ${classes.row} `}>
             <div className={classes.gridContainer}>
               {this.state.filmsList.map(film => (

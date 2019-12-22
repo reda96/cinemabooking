@@ -88,6 +88,7 @@ class LogIn extends Component {
     }
     let form = formElementsArray.map(formElement => (
       <div
+        key={formElement.id}
         style={{
           display: "grid",
           gridTemplateColumns: "35px 250px",
