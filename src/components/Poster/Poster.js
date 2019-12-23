@@ -1,10 +1,10 @@
 import React from "react";
-import picture from "../../assets/filmPoster.jpg";
 
 const poster = props => (
   <div>
     <img
-      src={picture}
+      onClick={props.clicked}
+      src={props.imgUrl}
       style={{
         width: props.width,
         height: props.height,

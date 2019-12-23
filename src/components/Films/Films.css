@@ -14,7 +14,9 @@
   font-size: 30px;
   cursor: pointer;
 }
-
+.FontAwesomeIcon :hover {
+  color: rgba(131, 127, 127, 0.788);
+}
 .gridContainer {
   display: grid;
   float: none;

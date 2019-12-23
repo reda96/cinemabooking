@@ -4,6 +4,7 @@ import Poster from "../Poster/Poster";
 import Auxiliary from "././../../hoc/Auxiliary";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../components/UI/Button/Button";
+import imagesArray from "../../assets/images";
 import {
   faChevronRight,
   faPlay,
@@ -21,40 +22,28 @@ class Films extends Component {
     for (let key in this.props.films) {
       films.push({ ...this.props.films[key], id: key });
     }
-    this.setState({ films: films });
+    this.setState({ films: films, i: this.props.counter });
   }
-  handleRightShift = () => {
-    console.log(this.state);
-    if (this.state.i < this.props.films.length - 1) {
-      this.setState({ i: this.state.i + 1 });
-    }
-  };
-  handleLeftShift = () => {
-    console.log(this.state);
-    if (this.state.i > 0) {
-      this.setState({ i: this.state.i - 1 });
-    }
-  };
+
   render() {
     let film = null;
 
     if (this.state.films.length > 0) {
-      // console.log(this.state.films[0].name);
       film = (
         <div style={{ marginLeft: "20px" }}>
           <div className={classes.devSplit}>
             <div className={classes.devSplit} style={{ width: "400px" }}>
-              <h2>{this.state.films[this.state.i].name}</h2>
-              {`${this.state.films[this.state.i].type} | ${
-                this.state.films[this.state.i].duration
+              <h2>{this.state.films[this.props.counter].name}</h2>
+              {`${this.state.films[this.props.counter].type} | ${
+                this.state.films[this.props.counter].duration
               }`}
             </div>
 
-            <div>{this.state.films[this.state.i].actors}</div>
+            <div>{this.state.films[this.props.counter].actors}</div>
           </div>
 
           <p className={classes.devSplit}>
-            {this.state.films[this.state.i].description}
+            {this.state.films[this.props.counter].description}
           </p>
           <div
             style={{
@@ -117,12 +106,22 @@ class Films extends Component {
         </div>
       );
     }
+    let poster = <div></div>;
+    if (this.state.films.length) {
+      poster = (
+        <div className={classes.gridItem}>
+          <Poster
+            imgUrl={imagesArray[this.props.counter]}
+            width="350px"
+            height="505px"
+          />
+        </div>
+      );
+    }
     return (
       <Auxiliary>
         <div className={classes.gridContainer}>
-          <div className={classes.gridItem}>
-            <Poster width="350px" height="505px" />
-          </div>
+          {poster}
 
           <div className={classes.gridItem}>
             <div
@@ -138,7 +137,7 @@ class Films extends Component {
                 <FontAwesomeIcon
                   className={classes.FontAwesomeIcon}
                   icon={faChevronRight}
-                  onClick={() => this.handleRightShift()}
+                  onClick={() => this.props.rightShift()}
                 />
               </div>
               <div
@@ -150,7 +149,7 @@ class Films extends Component {
                 <FontAwesomeIcon
                   className={classes.FontAwesomeIcon}
                   icon={faChevronLeft}
-                  onClick={() => this.handleLeftShift()}
+                  onClick={() => this.props.leftShift()}
                 />
               </div>
             </div>
