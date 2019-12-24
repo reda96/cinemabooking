@@ -10,7 +10,8 @@ import {
   faPlay,
   faChevronLeft,
   faPlus,
-  faMoneyBill
+  faMoneyBill,
+  faStar
 } from "@fortawesome/free-solid-svg-icons";
 class Films extends Component {
   state = {
@@ -28,15 +29,24 @@ class Films extends Component {
   render() {
     let film = null;
 
+    let rating = [];
     if (this.state.films.length > 0) {
+      for (let i = 0; i < this.state.films[this.props.counter].rating; i++) {
+        rating = [<FontAwesomeIcon icon={faStar} />, rating];
+      }
       film = (
         <div style={{ marginLeft: "20px" }}>
           <div className={classes.devSplit}>
             <div className={classes.devSplit} style={{ width: "400px" }}>
               <h2>{this.state.films[this.props.counter].name}</h2>
-              {`${this.state.films[this.props.counter].type} | ${
-                this.state.films[this.props.counter].duration
-              }`}
+              <div style={{ display: "inline-block" }}>
+                {rating.map(r => r)}
+              </div>
+              <div>
+                {`${this.state.films[this.props.counter].type} | ${
+                  this.state.films[this.props.counter].duration
+                }`}
+              </div>
             </div>
 
             <div>{this.state.films[this.props.counter].actors}</div>
