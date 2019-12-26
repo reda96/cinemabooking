@@ -38,3 +38,10 @@ export const fetchFilms = () => {
       });
   };
 };
+
+export const chooseFilm = chooseFilm => {
+  return {
+    type: actionTypes.CHOOSE_FILM,
+    chosenFilm: chooseFilm
+  };
+};

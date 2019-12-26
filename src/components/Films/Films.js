@@ -13,7 +13,7 @@ import {
   faMoneyBill,
   faStar
 } from "@fortawesome/free-solid-svg-icons";
-import NavLink from "react-router-dom";
+import { Link } from "react-router-dom";
 class Films extends Component {
   state = {
     films: [],
@@ -31,30 +31,30 @@ class Films extends Component {
     let film = null;
 
     let rating = [];
-    if (this.state.films.length > 0) {
-      for (let i = 0; i < this.state.films[this.props.counter].rating; i++) {
+    if (this.props.films.length > 0) {
+      for (let i = 0; i < this.props.films[this.props.counter].rating; i++) {
         rating = [<FontAwesomeIcon key={i} icon={faStar} />, rating];
       }
       film = (
         <div style={{ marginLeft: "20px" }}>
           <div className={classes.devSplit}>
             <div className={classes.devSplit} style={{ width: "400px" }}>
-              <h2>{this.state.films[this.props.counter].name}</h2>
+              <h2>{this.props.films[this.props.counter].name}</h2>
               <div style={{ display: "inline-block" }}>
                 {rating.map(r => r)}
               </div>
               <div>
-                {`${this.state.films[this.props.counter].type} | ${
-                  this.state.films[this.props.counter].duration
+                {`${this.props.films[this.props.counter].type} | ${
+                  this.props.films[this.props.counter].duration
                 }`}
               </div>
             </div>
 
-            <div>{this.state.films[this.props.counter].actors}</div>
+            <div>{this.props.films[this.props.counter].actors}</div>
           </div>
 
           <p className={classes.devSplit}>
-            {this.state.films[this.props.counter].description}
+            {this.props.films[this.props.counter].description}
           </p>
           <div
             style={{
@@ -106,17 +106,18 @@ class Films extends Component {
               >
                 <FontAwesomeIcon icon={faPlus} /> More..
               </Button>
-
-              <Button
-                style={{
-                  height: "40px",
-                  width: "120px",
-                  lineHeight: "normal"
-                }}
-                btnType="Black"
-              >
-                <FontAwesomeIcon icon={faMoneyBill} /> BUY
-              </Button>
+              <Link to="/bookingDetails">
+                <Button
+                  style={{
+                    height: "40px",
+                    width: "120px",
+                    lineHeight: "normal"
+                  }}
+                  btnType="Black"
+                >
+                  <FontAwesomeIcon icon={faMoneyBill} /> BUY
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

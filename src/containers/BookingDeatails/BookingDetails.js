@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import classes from "./BookingDetails.css";
 import Poster from "../../components/Poster/Poster";
-import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalendar,
+  faClock,
+  faChevronRight
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../components/UI/Button/Button";
 import imagesArray from "../../assets/images";
+import { connect } from "react-redux";
 class BookingDetails extends Component {
   state = {};
 
@@ -45,7 +50,11 @@ class BookingDetails extends Component {
       <div className={classes.container}>
         <div className={classes.gridContainer}>
           <div>
-            <Poster width="225px" height="340px" />
+            <Poster
+              imgUrl={imagesArray[this.props.counter]}
+              width="225px"
+              height="340px"
+            />
           </div>
           <div style={{ marginTop: "60px" }}>
             <FontAwesomeIcon
@@ -101,10 +110,18 @@ class BookingDetails extends Component {
           </div>
         </div>
         <hr style={{ width: "800px", marginTop: "40px" }}></hr>
-        <Button classes={classes.Next}>next ></Button>
+        <Button classes={classes.Next}>
+          next <FontAwesomeIcon icon={faChevronRight} />
+        </Button>
       </div>
     );
   }
 }
-
-export default BookingDetails;
+const mapStateToProps = state => {
+  return {
+    films: state.films.films,
+    loading: state.films.loading,
+    counter: state.films.chosenFilm
+  };
+};
+export default connect(mapStateToProps)(BookingDetails);

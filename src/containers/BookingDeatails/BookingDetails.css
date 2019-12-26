@@ -36,6 +36,9 @@
   margin-right: 300px;
   border-color: #df8d0b;
   border-style: solid;
+  font-size: 15px;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 .Next:hover {
   background-color: #ad6608;

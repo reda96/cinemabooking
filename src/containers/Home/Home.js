@@ -41,13 +41,13 @@ class Home extends Component {
     this.props.onFetchFilms();
   }
   handleRightShift = () => {
-    if (this.state.counter < this.props.films.length - 1) {
-      this.setState({ counter: this.state.counter + 1 });
+    if (this.props.counter < this.props.films.length - 1) {
+      this.props.chooseFilm(this.props.counter + 1);
     }
   };
   handleLeftShift = () => {
-    if (this.state.counter > 0) {
-      this.setState({ counter: this.state.counter - 1 });
+    if (this.props.counter > 0) {
+      this.props.chooseFilm(this.props.counter - 1);
     }
   };
   render() {
@@ -75,7 +75,7 @@ class Home extends Component {
             films={this.props.films}
             rightShift={this.handleRightShift}
             leftShift={this.handleLeftShift}
-            counter={this.state.counter}
+            counter={this.props.counter}
           />
         );
       }
@@ -84,9 +84,10 @@ class Home extends Component {
           {this.state.filmsList.map(film => (
             <div key={film.id} className={classes.gridItem}>
               <Poster
-                clicked={() =>
-                  this.setState({ counter: film.id, selectedFilm: true })
-                }
+                clicked={() => {
+                  this.setState({ selectedFilm: true });
+                  this.props.onChoseFilm(film.id);
+                }}
                 imgUrl={imagesArray[film.id]}
                 width="300px"
                 height="450px"
@@ -177,13 +178,17 @@ const mapDispatchToProps = dispatch => {
   return {
     onFetchFilms: () => {
       dispatch(actions.fetchFilms());
+    },
+    onChoseFilm: counter => {
+      dispatch(actions.chooseFilm(counter));
     }
   };
 };
 const mapStateToProps = state => {
   return {
     films: state.films.films,
-    loading: state.films.loading
+    loading: state.films.loading,
+    counter: state.films.chosenFilm
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home));
