@@ -11,6 +11,9 @@ import Films from "../../components/Films/Films";
 import LOGIN from "../Auth/LogIn";
 import axios from "../../axios-orders";
 import imagesArray from "../../assets/images";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/index";
 library.add(fab, faSearch);
 class Home extends Component {
   state = {
@@ -29,42 +32,16 @@ class Home extends Component {
       //   description:
       //     "Spencer secretly kept the pieces of the Jumanji game and, despite the previous adventure, he decides to repair its system in his grandfather's basement. His friends, Bethany, Fridge, and Martha re-enter Jumanji to rescue him, to find that Spencer’s grandfather and his friend got drawn in too. From arid deserts to snowy mountains, the players must play to escape the world’s most dangerous game.",
       //   prices: [{ time: "00:45", price: "100.0 EGP" }]
-      // },
-      // {
-      //   img:
-      //     "http://photo.elcinema.com.s3.amazonaws.com/uploads/_480x640_0ba3acce10c4c5c6163106cc9096dc343685963bf0e5078cb5a14285a39a6bdd.jpg",
-      //   name: "Ford v. Ferrari / Le Mans' 66",
-      //   rating: 8,
-      //   type: "Drama, Action, Biography",
-      //   duration: "152 mins",
-      //   actors: [
-      //     " Christian Bale",
-      //     "Matt Damon",
-      //     "Caitriona Balfe",
-      //     "Tracy Letts"
-      //   ],
-      //   description:
-      //     "The film depicts the competition between Ford and Ferrari to win the 24 Hours of Le Mans in 1966.",
-      //   prices: [{ time: "00:45", price: "100.0 EGP" }]
       // }
     ],
     counter: 0,
     selectedFilm: false
   };
   componentDidMount() {
-    axios.get("/films.json").then(res => {
-      const films = [];
-      for (let key in res.data) {
-        films.push({ ...res.data[key], id: key });
-      }
-      this.setState({ films: films });
-    });
-    // axios.post("/films.json", this.state.films[1]).then(resp => {
-    //   console.log(resp);
-    // });
+    this.props.onFetchFilms();
   }
   handleRightShift = () => {
-    if (this.state.counter < this.state.films.length - 1) {
+    if (this.state.counter < this.props.films.length - 1) {
       this.setState({ counter: this.state.counter + 1 });
     }
   };
@@ -91,11 +68,11 @@ class Home extends Component {
     let logInForm = <LOGIN />;
     let gridContainer = null;
     let films = null;
-    if (this.state.films.length) {
+    if (this.props.films.length) {
       if (this.state.selectedFilm) {
         films = (
           <Films
-            films={this.state.films}
+            films={this.props.films}
             rightShift={this.handleRightShift}
             leftShift={this.handleLeftShift}
             counter={this.state.counter}
@@ -142,8 +119,8 @@ class Home extends Component {
                 icon={["fab", "instagram"]}
               />
               <FontAwesomeIcon
-                className={`${classes.FontAwesomeIcon} ${classes.youtube}`}
                 icon={["fab", "youtube"]}
+                className={`${classes.FontAwesomeIcon} ${classes.youtube}`}
               />
             </div>
           </div>
@@ -196,4 +173,17 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchFilms: () => {
+      dispatch(actions.fetchFilms());
+    }
+  };
+};
+const mapStateToProps = state => {
+  return {
+    films: state.films.films,
+    loading: state.films.loading
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home));

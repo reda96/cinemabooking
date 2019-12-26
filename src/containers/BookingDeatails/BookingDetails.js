@@ -4,6 +4,7 @@ import Poster from "../../components/Poster/Poster";
 import { faCalendar, faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../components/UI/Button/Button";
+import imagesArray from "../../assets/images";
 class BookingDetails extends Component {
   state = {};
 

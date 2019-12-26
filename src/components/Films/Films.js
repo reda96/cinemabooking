@@ -13,6 +13,7 @@ import {
   faMoneyBill,
   faStar
 } from "@fortawesome/free-solid-svg-icons";
+import NavLink from "react-router-dom";
 class Films extends Component {
   state = {
     films: [],
@@ -32,7 +33,7 @@ class Films extends Component {
     let rating = [];
     if (this.state.films.length > 0) {
       for (let i = 0; i < this.state.films[this.props.counter].rating; i++) {
-        rating = [<FontAwesomeIcon icon={faStar} />, rating];
+        rating = [<FontAwesomeIcon key={i} icon={faStar} />, rating];
       }
       film = (
         <div style={{ marginLeft: "20px" }}>
@@ -97,6 +98,11 @@ class Films extends Component {
                   width: "120px",
                   lineHeight: "normal"
                 }}
+                clicked={() =>
+                  this.props.history.push({
+                    pathname: "/bookingDetails"
+                  })
+                }
               >
                 <FontAwesomeIcon icon={faPlus} /> More..
               </Button>
