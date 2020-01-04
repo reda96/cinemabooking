@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import classes from "./BookingDetails.css";
 import Poster from "../../components/Poster/Poster";
+import Spinner from "../../components/UI/Spinner/Spinner";
 import {
   faCalendar,
   faClock,
@@ -181,10 +182,11 @@ class BookingDetails extends Component {
   }
   render() {
     let data = [];
-    let showDates = <div className="loader"></div>;
-    let showTimes = <div className="loader"></div>;
-    let showScreens = <div className="loader"></div>;
-    let name = <div className="loader"></div>;
+    let showDates = <Spinner />;
+    let showTimes = <Spinner />;
+    let showScreens = <Spinner />;
+    let gridContainer = <Spinner />;
+    let name = <Spinner />;
     if (this.props.times.length > 0 && this.props.films.length > 0) {
       // console.log(this.props.times);
 
@@ -269,8 +271,8 @@ class BookingDetails extends Component {
         </select>
       );
     }
-    return (
-      <div className={classes.container}>
+    if (data.length > 0) {
+      gridContainer = (
         <div className={classes.gridContainer}>
           <div>
             <Poster
@@ -307,6 +309,11 @@ class BookingDetails extends Component {
             </div>
           </div>
         </div>
+      );
+    }
+    return (
+      <div className={classes.container}>
+        {gridContainer}
         <hr style={{ width: "800px", marginTop: "40px" }}></hr>
         <Button classes={classes.Next}>
           next <FontAwesomeIcon icon={faChevronRight} />
