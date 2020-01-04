@@ -29,3 +29,10 @@
 
   border-radius: 3px;
 }
+.space {
+  width: 70px;
+  display: inline-block;
+  height: 20px;
+  font-size: 17px;
+  text-align: center;
+}

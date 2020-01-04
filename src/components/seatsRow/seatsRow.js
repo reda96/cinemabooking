@@ -2,10 +2,12 @@ import React from "react";
 import classes from "./seatsRow.css";
 const seatsRow = props => {
   return Object.keys(props.seats[props.N]).map(key => {
-    return props.seats[props.N][key] === "available" ? (
-      <div className={`${classes.seat} ${classes.available} `}>{key}</div>
+    return props.seats[props.N][key].status === "available" ? (
+      <div key={key} className={`${classes.seat} ${classes.available} `}>
+        {key}
+      </div>
     ) : (
-      <div className={`${classes.seat}`}></div>
+      <div key={key} className={classes.space}></div>
     );
   });
 };

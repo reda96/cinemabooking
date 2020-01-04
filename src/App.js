@@ -17,7 +17,7 @@ function App() {
       <Route path="/bookingDetails" component={BookingDetails} />
       <Route path="/screen" component={Screen} />
       <Route path="/" exact component={Home} />
-      <Redirect to="/screen" />
+      <Redirect to="/" />
     </Switch>
   );
   return (
