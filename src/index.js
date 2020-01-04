@@ -6,11 +6,13 @@ import { BrowserRouter } from "react-router-dom";
 import registerServiceWorker from "./registerServiceWorker";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import films from "./store/reducers/films";
+import bookingDetails from "./store/reducers/bookingDetails";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 
 const rootReducer = combineReducers({
-  films: films
+  films: films,
+  bookingDetails: bookingDetails
 });
 const composeEnhancers =
   process.env.Node_ENV === "development"

@@ -23,6 +23,22 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.FontAwesomeIcon {
+  height: 30px;
+  margin: 10px;
+  font-size: 40px;
+  cursor: pointer;
+  color: white;
+}
+.social {
+  float: right;
+  margin-right: 30px;
 }

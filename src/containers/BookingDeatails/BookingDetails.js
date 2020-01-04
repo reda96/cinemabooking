@@ -10,6 +10,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../components/UI/Button/Button";
 import imagesArray from "../../assets/images";
 import { connect } from "react-redux";
+import axios from "../../axios-orders";
+import * as actions from "../../store/actions/index";
+
 class BookingDetails extends Component {
   state = {};
 
@@ -45,7 +48,227 @@ class BookingDetails extends Component {
     const date = day + " " + today.getUTCDate() + " " + thisMonth;
     return date;
   };
+
+  componentDidMount() {
+    this.props.onFetchTimes();
+    const times = {
+      //   firstDay: {
+      //     Date: this.getTheDate(0),
+      //     "03:00pm": {
+      //       screen1: "Terminator: Dark Fate",
+      //       screen2: "Jumanji: The Next Level",
+      //       screen3: "Ford v. Ferrari / Le Mans' 66",
+      //       screen4: "The Money",
+      //       screen5: "Frozen II"
+      //     },
+      //     "06:00pm": {
+      //       screen1: "Terminator: Dark Fate",
+      //       screen2: "Jumanji: The Next Level",
+      //       screen3: "Ford v. Ferrari / Le Mans' 66",
+      //       screen4: "The Money",
+      //       screen5: "Frozen II"
+      //     },
+      //     "09:00pm": {
+      //       screen1: "Terminator: Dark Fate",
+      //       screen2: "Jumanji: The Next Level",
+      //       screen3: "Ford v. Ferrari / Le Mans' 66",
+      //       screen4: "The Money",
+      //       screen5: "Frozen II"
+      //     },
+      //     "12:00am": {
+      //       screen1: "Terminator: Dark Fate",
+      //       screen2: "Jumanji: The Next Level",
+      //       screen3: "Ford v. Ferrari / Le Mans' 66",
+      //       screen4: "The Money",
+      //       screen5: "Frozen II"
+      //     }
+      //   },
+      //   secondDay: {
+      //     Date: this.getTheDate(1),
+      //     "03:00pm": {
+      //       screen1: "Terminator: Dark Fate",
+      //       screen2: "Jumanji: The Next Level",
+      //       screen3: "Ford v. Ferrari / Le Mans' 66",
+      //       screen4: "The Money",
+      //       screen5: "Frozen II"
+      //     },
+      //     "06:00pm": {
+      //       screen1: "Terminator: Dark Fate",
+      //       screen2: "Jumanji: The Next Level",
+      //       screen3: "Ford v. Ferrari / Le Mans' 66",
+      //       screen4: "The Money",
+      //       screen5: "Frozen II"
+      //     },
+      //     "09:00pm": {
+      //       screen1: "Terminator: Dark Fate",
+      //       screen2: "Jumanji: The Next Level",
+      //       screen3: "Ford v. Ferrari / Le Mans' 66",
+      //       screen4: "The Money",
+      //       screen5: "Frozen II"
+      //     },
+      //     "12:00am": {
+      //       screen1: "Terminator: Dark Fate",
+      //       screen2: "Jumanji: The Next Level",
+      //       screen3: "Ford v. Ferrari / Le Mans' 66",
+      //       screen4: "The Money",
+      //       screen5: "Frozen II"
+      //     }
+      //   },
+      //   thirdDay: {
+      //     Date: this.getTheDate(2),
+      //     "03:00pm": {
+      //       screen1: "Terminator: Dark Fate",
+      //       screen2: "Jumanji: The Next Level",
+      //       screen3: "Ford v. Ferrari / Le Mans' 66",
+      //       screen4: "The Money",
+      //       screen5: "Frozen II"
+      //     },
+      //     "06:00pm": {
+      //       screen1: "Terminator: Dark Fate",
+      //       screen2: "Jumanji: The Next Level",
+      //       screen3: "Ford v. Ferrari / Le Mans' 66",
+      //       screen4: "The Money",
+      //       screen5: "Frozen II"
+      //     },
+      //     "09:00pm": {
+      //       screen1: "Terminator: Dark Fate",
+      //       screen2: "Jumanji: The Next Level",
+      //       screen3: "Ford v. Ferrari / Le Mans' 66",
+      //       screen4: "The Money",
+      //       screen5: "Frozen II"
+      //     },
+      //     "12:00am": {
+      //       screen1: "Terminator: Dark Fate",
+      //       screen2: "Jumanji: The Next Level",
+      //       screen3: "Ford v. Ferrari / Le Mans' 66",
+      //       screen4: "The Money",
+      //       screen5: "Frozen II"
+      //     }
+      //   },
+      //   fourthDay: {
+      //     Date: this.getTheDate(3),
+      //     "03:00pm": {
+      //       screen1: "Terminator: Dark Fate",
+      //       screen2: "Jumanji: The Next Level",
+      //       screen3: "Ford v. Ferrari / Le Mans' 66",
+      //       screen4: "The Money",
+      //       screen5: "Frozen II"
+      //     },
+      //     "06:00pm": {
+      //       screen1: "Terminator: Dark Fate",
+      //       screen2: "Jumanji: The Next Level",
+      //       screen3: "Ford v. Ferrari / Le Mans' 66",
+      //       screen4: "The Money",
+      //       screen5: "Frozen II"
+      //     },
+      //     "09:00pm": {
+      //       screen1: "Terminator: Dark Fate",
+      //       screen2: "Jumanji: The Next Level",
+      //       screen3: "Ford v. Ferrari / Le Mans' 66",
+      //       screen4: "The Money",
+      //       screen5: "Frozen II"
+      //     },
+      //     "12:00am": {
+      //       screen1: "Terminator: Dark Fate",
+      //       screen2: "Jumanji: The Next Level",
+      //       screen3: "Ford v. Ferrari / Le Mans' 66",
+      //       screen4: "The Money",
+      //       screen5: "Frozen II"
+      //     }
+      //   }
+    };
+    // axios.post("/times.json", times).then(res => console.log(res));
+  }
   render() {
+    let data = [];
+    let showDates = <div className="loader"></div>;
+    let showTimes = <div className="loader"></div>;
+    let showScreens = <div className="loader"></div>;
+    let name = <div className="loader"></div>;
+    if (this.props.times.length > 0 && this.props.films.length > 0) {
+      // console.log(this.props.times);
+
+      const timeslist = this.props.times;
+      for (let index = 0; index < timeslist.length; index++) {
+        // console.log(times[index]);
+
+        for (let key in timeslist[index]) {
+          for (let key2 in timeslist[index][key]) {
+            if (
+              timeslist[index][key][key2] ===
+              this.props.films[this.props.counter].name
+            )
+              data.push({
+                date: timeslist[index]["Date"],
+                time: key,
+                screen: key2,
+                name: timeslist[index][key][key2]
+              });
+          }
+        }
+        // console.log(data);
+      }
+
+      let dates = [];
+      let times = [];
+      let screens = [];
+      if (data.length > 0) {
+        for (let i = 0; i < data.length; i++) {
+          if (!dates.includes(data[i]["date"])) dates.push(data[i]["date"]);
+          if (!times.includes(data[i]["time"])) times.push(data[i]["time"]);
+          if (!screens.includes(data[i]["screen"]))
+            screens.push(data[i]["screen"]);
+        }
+      }
+      name = (
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 7fr",
+            margin: "10px"
+          }}
+        >
+          <strong> Movie: </strong>
+          {data[0]["name"]}
+        </div>
+      );
+      showDates = (
+        <select className={classes.Select} defaultValue={"DEFAULT"}>
+          <option value="DEFAULT" disabled hidden>
+            Choose Date{" "}
+          </option>
+          {dates.map((d, i) => (
+            <option className={classes.option} value={d} key={i}>
+              {d}
+            </option>
+          ))}
+        </select>
+      );
+      showTimes = (
+        <select className={classes.Select} defaultValue={"DEFAULT"}>
+          <option value="DEFAULT" disabled hidden>
+            Choose ShowTime{" "}
+          </option>
+          {times.map((d, i) => (
+            <option value={d} key={i}>
+              {d}
+            </option>
+          ))}
+        </select>
+      );
+      showScreens = (
+        <select className={classes.Select} defaultValue={"DEFAULT"}>
+          <option value="DEFAULT" disabled hidden>
+            Choose Screen{" "}
+          </option>
+          {screens.map((d, i) => (
+            <option value={d} key={i}>
+              {d}
+            </option>
+          ))}
+        </select>
+      );
+    }
     return (
       <div className={classes.container}>
         <div className={classes.gridContainer}>
@@ -56,56 +279,31 @@ class BookingDetails extends Component {
               height="340px"
             />
           </div>
-          <div style={{ marginTop: "60px" }}>
-            <FontAwesomeIcon
-              className={classes.FontAwesomeIcon}
-              icon={faCalendar}
-            />
-            <FontAwesomeIcon
-              className={classes.FontAwesomeIcon}
-              icon={faClock}
-            />
-          </div>
+          <div></div>
           <div>
-            <div style={{ height: "auto" }}>
-              <p>
-                <strong>Movie:</strong>{" "}
-              </p>
-            </div>
+            <div style={{ height: "auto" }}>{name}</div>
 
-            <div style={{ display: "flex" }}>
-              <select className={classes.Select}>
-                <option value="0" disabled selected>
-                  Choose Date{" "}
-                </option>
-                <option value="1">{this.getTheDate(0)} </option>
-                <option value="2">{this.getTheDate(1)} </option>
-                <option value="3">{this.getTheDate(2)} </option>
-                <option value="4">{this.getTheDate(3)} </option>
-                <option value="5">{this.getTheDate(4)} </option>
-              </select>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 10fr" }}>
+              {" "}
+              <FontAwesomeIcon
+                className={classes.FontAwesomeIcon}
+                icon={faCalendar}
+              />{" "}
+              {showDates}
             </div>
-            <div style={{ display: "flex" }}>
-              <select className={classes.Select}>
-                <option disabled selected>
-                  Choose ShowTime
-                </option>
-                <option value="1">03:00 pm</option>
-                <option value="2">06:00 pm</option>
-                <option value="3">09:00 pm</option>
-                <option value="4">12:00 am</option>
-              </select>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 10fr" }}>
+              {" "}
+              <FontAwesomeIcon
+                className={classes.FontAwesomeIcon}
+                icon={faClock}
+              />
+              {showTimes}
             </div>
-            <div>
-              <select className={classes.Select}>
-                <option disabled selected>
-                  Choose Screen
-                </option>
-                <option value="0">Screen 1</option>
-                <option value="1">Screen 2</option>
-                <option value="2">Screen 3</option>
-                <option value="3">Screen 4</option>
-              </select>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 10fr" }}>
+              <div
+                style={{ display: "block", width: "auto", height: "50px" }}
+              />
+              {showScreens}
             </div>
           </div>
         </div>
@@ -121,7 +319,16 @@ const mapStateToProps = state => {
   return {
     films: state.films.films,
     loading: state.films.loading,
-    counter: state.films.chosenFilm
+    counter: state.films.chosenFilm,
+    times: state.bookingDetails.times,
+    loadingTimes: state.bookingDetails.loading
   };
 };
-export default connect(mapStateToProps)(BookingDetails);
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchTimes: () => {
+      dispatch(actions.fetchTimes());
+    }
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(BookingDetails);

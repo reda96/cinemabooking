@@ -42,12 +42,12 @@ class Home extends Component {
   }
   handleRightShift = () => {
     if (this.props.counter < this.props.films.length - 1) {
-      this.props.chooseFilm(this.props.counter + 1);
+      this.props.onChoseFilm(this.props.counter + 1);
     }
   };
   handleLeftShift = () => {
     if (this.props.counter > 0) {
-      this.props.chooseFilm(this.props.counter - 1);
+      this.props.onChoseFilm(this.props.counter - 1);
     }
   };
   render() {
@@ -102,34 +102,10 @@ class Home extends Component {
         <div className={classes.main}>
           <div
             style={{
-              height: "60px"
-              // overflow: "hidden",
-            }}
-          >
-            <div className={classes.social}>
-              <FontAwesomeIcon
-                className={`${classes.FontAwesomeIcon} ${classes.facebook}`}
-                icon={["fab", "facebook-f"]}
-              />
-              <FontAwesomeIcon
-                className={`${classes.FontAwesomeIcon} ${classes.twitter}`}
-                icon={["fab", "twitter"]}
-              />
-              <FontAwesomeIcon
-                className={`${classes.FontAwesomeIcon} ${classes.instgram}`}
-                icon={["fab", "instagram"]}
-              />
-              <FontAwesomeIcon
-                icon={["fab", "youtube"]}
-                className={`${classes.FontAwesomeIcon} ${classes.youtube}`}
-              />
-            </div>
-          </div>
-          <div
-            style={{
               height: "50px",
               overflow: "visible",
-              boxShadow: "0 2px 4px 0"
+              boxShadow: "0 2px 4px 0",
+              width: "100%"
             }}
           >
             <ul className={classes.navbar}>
@@ -163,8 +139,21 @@ class Home extends Component {
           </div>
         </div>
 
-        <div style={{ backgroundColor: "#383838", paddingTop: "20px" }}>
-          {films}
+        <div
+          style={{
+            backgroundColor: "#383838",
+            width: "100%",
+            height: "auto"
+          }}
+        >
+          <div
+            style={{
+              margin: "0 auto",
+              paddingTop: "30px"
+            }}
+          >
+            {films}
+          </div>
           <div className={`${classes.Limits} ${classes.row} `}>
             {gridContainer}
           </div>

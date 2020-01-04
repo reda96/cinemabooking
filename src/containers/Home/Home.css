@@ -46,7 +46,8 @@
 }
 
 .main {
-  height: 150px;
+  /* height: auto; */
+  display: flex;
   background-position: inherit;
   background-repeat: no-repeat;
 }
