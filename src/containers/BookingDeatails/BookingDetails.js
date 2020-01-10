@@ -13,10 +13,8 @@ import imagesArray from "../../assets/images";
 import { connect } from "react-redux";
 import axios from "../../axios-orders";
 import * as actions from "../../store/actions/index";
-
+import { Redirect } from "react-router-dom";
 class BookingDetails extends Component {
-  state = {};
-
   getTheDate = c => {
     const t = new Date();
     let today = new Date(t);
@@ -48,6 +46,11 @@ class BookingDetails extends Component {
     const day = weekday[today.getDay()];
     const date = day + " " + today.getUTCDate() + " " + thisMonth;
     return date;
+  };
+  state = {
+    date: "DEFAULT",
+    time: "DEFAULT",
+    screen: "DEFAULT"
   };
 
   componentDidMount() {
@@ -235,7 +238,11 @@ class BookingDetails extends Component {
         </div>
       );
       showDates = (
-        <select className={classes.Select} defaultValue={"DEFAULT"}>
+        <select
+          className={classes.Select}
+          defaultValue={this.state.date}
+          onChange={e => this.setState({ date: e.target.value })}
+        >
           <option value="DEFAULT" disabled hidden>
             Choose Date{" "}
           </option>
@@ -247,7 +254,11 @@ class BookingDetails extends Component {
         </select>
       );
       showTimes = (
-        <select className={classes.Select} defaultValue={"DEFAULT"}>
+        <select
+          className={classes.Select}
+          defaultValue={this.state.time}
+          onChange={e => this.setState({ time: e.target.value })}
+        >
           <option value="DEFAULT" disabled hidden>
             Choose ShowTime{" "}
           </option>
@@ -259,7 +270,11 @@ class BookingDetails extends Component {
         </select>
       );
       showScreens = (
-        <select className={classes.Select} defaultValue={"DEFAULT"}>
+        <select
+          className={classes.Select}
+          defaultValue={this.state.screen}
+          onChange={e => this.setState({ screen: e.target.value })}
+        >
           <option value="DEFAULT" disabled hidden>
             Choose Screen{" "}
           </option>
@@ -315,7 +330,18 @@ class BookingDetails extends Component {
       <div className={classes.container}>
         {gridContainer}
         <hr style={{ width: "800px", marginTop: "40px" }}></hr>
-        <Button classes={classes.Next}>
+        <Button
+          classes={classes.Next}
+          clicked={() => {
+            this.props.onChoosenDetails({
+              date: this.state.date,
+              time: this.state.time,
+              screen: this.state.screen,
+              name: this.props.films[this.props.counter].name
+            });
+            this.props.history.replace("/screen");
+          }}
+        >
           next <FontAwesomeIcon icon={faChevronRight} />
         </Button>
       </div>
@@ -335,6 +361,9 @@ const mapDispatchToProps = dispatch => {
   return {
     onFetchTimes: () => {
       dispatch(actions.fetchTimes());
+    },
+    onChoosenDetails: details => {
+      dispatch(actions.choosenDetails(details));
     }
   };
 };

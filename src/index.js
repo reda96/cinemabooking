@@ -7,12 +7,14 @@ import registerServiceWorker from "./registerServiceWorker";
 import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import films from "./store/reducers/films";
 import bookingDetails from "./store/reducers/bookingDetails";
+import screens from "./store/reducers/screens";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 
 const rootReducer = combineReducers({
   films: films,
-  bookingDetails: bookingDetails
+  bookingDetails: bookingDetails,
+  screens: screens
 });
 const composeEnhancers =
   process.env.Node_ENV === "development"

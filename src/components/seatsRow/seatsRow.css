@@ -3,6 +3,7 @@
   background-color: #ffffff;
   color: #333333;
   cursor: pointer;
+  margin-top: 3px;
 }
 .available:hover {
   background-color: #999;
@@ -30,9 +31,10 @@
   border-radius: 3px;
 }
 .space {
-  width: 70px;
+  width: 83px;
   display: inline-block;
   height: 20px;
   font-size: 17px;
   text-align: center;
+  margin-top: 3px;
 }

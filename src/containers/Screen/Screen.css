@@ -74,7 +74,11 @@ li {
 }
 .singleBookingRow {
   border-bottom: 1px dashed #ddd;
+  width: 70%;
   position: relative;
+  display: grid;
+  grid-template-columns: 1fr 11fr 1fr;
+  grid-template-rows: auto;
 }
 .seat {
   margin-left: 6px;

@@ -1,8 +1,14 @@
-import React, { Component } from "react";
 import classes from "./Screen.css";
 import SeatsRow from "../../components/seatsRow/seatsRow";
+import React, { Component } from "react";
+import seatsRow from "../../components/seatsRow/seatsRow";
+import Spinner from "../../components/UI/Spinner/Spinner";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/index";
 class Screen extends Component {
   state = {
+    fetchedTimes: [],
+    screens: [],
     seats: {
       A: {
         "1": { status: "available", value: 1 },
@@ -223,12 +229,109 @@ class Screen extends Component {
         "17": { status: "available", value: 17 },
         "18": { status: "available", value: 18 },
         "19": { status: "available", value: 19 },
-        "20": { status: "available", value: 20 }
+        "20": { status: "available", value: 20 },
+        "21": { status: "available", value: 21 }
       }
     }
   };
 
+  componentDidMount() {
+    this.props.onFetchScreen({
+      date: this.props.selectedDate,
+      time: this.props.selectedTime,
+      screen: this.props.selectedScreen
+    });
+  }
+
   render() {
+    let Screen = <Spinner />;
+
+    if (Object.keys(this.props.seats).length > 0) {
+      Screen = (
+        <div className={classes.Screen}>
+          <div className={classes.screenText}>Screen</div>
+          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
+            <div className={`${classes.seat}`}></div>
+          </div>
+          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
+            <div className={`${classes.seat} ${classes.rowKey}`}>A</div>
+            <div>
+              <SeatsRow seats={this.state.seats} N="A" />
+            </div>
+            <div className={`${classes.seat} ${classes.rowKey}`}>A</div>
+          </div>
+
+          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
+            <div className={`${classes.seat} ${classes.rowKey}`}>B</div>
+            <div>
+              <SeatsRow seats={this.state.seats} N="B" />
+            </div>
+            <div className={`${classes.seat} ${classes.rowKey}`}>B</div>
+          </div>
+
+          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
+            <div className={`${classes.seat} ${classes.rowKey}`}>C</div>
+            <div>
+              <SeatsRow seats={this.state.seats} N="C" />
+            </div>
+            <div className={`${classes.seat} ${classes.rowKey}`}>C</div>
+          </div>
+
+          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
+            <div className={`${classes.seat} ${classes.rowKey}`}>D</div>
+            <div>
+              <SeatsRow seats={this.state.seats} N="D" />
+            </div>
+            <div className={`${classes.seat} ${classes.rowKey}`}>D</div>
+          </div>
+
+          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
+            <div className={`${classes.seat} ${classes.rowKey}`}>E</div>
+            <div>
+              <SeatsRow seats={this.state.seats} N="E" />
+            </div>
+            <div className={`${classes.seat} ${classes.rowKey}`}>E</div>
+          </div>
+
+          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
+            <div className={`${classes.seat} ${classes.rowKey}`}>F</div>
+            <div>
+              <SeatsRow seats={this.state.seats} N="F" />
+            </div>
+            <div className={`${classes.seat} ${classes.rowKey}`}>F</div>
+          </div>
+
+          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
+            <div className={`${classes.seat} ${classes.rowKey}`}>G</div>
+            <div>
+              <SeatsRow seats={this.state.seats} N="G" />
+            </div>
+            <div className={`${classes.seat} ${classes.rowKey}`}>G</div>
+          </div>
+          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
+            <div className={`${classes.seat} ${classes.rowKey}`}>H</div>
+            <div>
+              <SeatsRow seats={this.state.seats} N="H" />
+            </div>
+            <div className={`${classes.seat} ${classes.rowKey}`}>H</div>
+          </div>
+          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
+            <div className={`${classes.seat} ${classes.rowKey}`}>I</div>
+            <div>
+              <SeatsRow seats={this.state.seats} N="I" />
+            </div>
+            <div className={`${classes.seat} ${classes.rowKey}`}>I</div>
+          </div>
+          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
+            <div className={`${classes.seat} ${classes.rowKey}`}>J</div>
+            <div>
+              <SeatsRow seats={this.state.seats} N="J" />
+            </div>
+            <div className={`${classes.seat} ${classes.rowKey}`}>J</div>
+          </div>
+        </div>
+      );
+    }
     return (
       <div className={classes.row}>
         <div className={classes.seatingMessage}>2D with intermission</div>
@@ -254,61 +357,25 @@ class Screen extends Component {
             </li>
           </ul>
         </div>
-        <div className={classes.Screen}>
-          <div className={classes.screenText}>Screen</div>
-          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
-            <div className={`${classes.seat}`}></div>
-          </div>
-          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
-            <div className={`${classes.seat} ${classes.rowKey}`}>A</div>
-            <SeatsRow seats={this.state.seats} N="A" />
-          </div>
-
-          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
-            <div className={`${classes.seat} ${classes.rowKey}`}>B</div>
-            <SeatsRow seats={this.state.seats} N="B" />
-          </div>
-
-          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
-            <div className={`${classes.seat} ${classes.rowKey}`}>C</div>
-            <SeatsRow seats={this.state.seats} N="C" />
-          </div>
-
-          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
-            <div className={`${classes.seat} ${classes.rowKey}`}>D</div>
-            <SeatsRow seats={this.state.seats} N="D" />
-          </div>
-
-          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
-            <div className={`${classes.seat} ${classes.rowKey}`}>E</div>
-            <SeatsRow seats={this.state.seats} N="E" />
-          </div>
-
-          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
-            <div className={`${classes.seat} ${classes.rowKey}`}>F</div>
-            <SeatsRow seats={this.state.seats} N="F" />
-          </div>
-
-          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
-            <div className={`${classes.seat} ${classes.rowKey}`}>G</div>
-            <SeatsRow seats={this.state.seats} N="G" />
-          </div>
-          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
-            <div className={`${classes.seat} ${classes.rowKey}`}>H</div>
-            <SeatsRow seats={this.state.seats} N="H" />
-          </div>
-          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
-            <div className={`${classes.seat} ${classes.rowKey}`}>I</div>
-            <SeatsRow seats={this.state.seats} N="I" />
-          </div>
-          <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
-            <div className={`${classes.seat} ${classes.rowKey}`}>J</div>
-            <SeatsRow seats={this.state.seats} N="J" />
-          </div>
-        </div>
+        {Screen}
       </div>
     );
   }
 }
-
-export default Screen;
+const mapStateToProps = state => {
+  return {
+    selectedFilm: state.bookingDetails.filmName,
+    selectedTime: state.bookingDetails.time,
+    selectedScreen: state.bookingDetails.screen,
+    selectedDate: state.bookingDetails.date,
+    seats: state.screens.seats
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    onFetchScreen: details => {
+      dispatch(actions.fetchScreens(details));
+    }
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Screen);

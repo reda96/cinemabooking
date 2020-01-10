@@ -18,6 +18,15 @@ export const fetchTimesFail = error => {
     error: error
   };
 };
+export const choosenDetails = details => {
+  return {
+    type: actionTypes.CHOOSEN_DETAILS,
+    time: details.time,
+    date: details.date,
+    screen: details.screen,
+    filmName: details.filmName
+  };
+};
 export const fetchTimes = () => {
   return dispatch => {
     dispatch(fetchTimesStart());
@@ -34,7 +43,6 @@ export const fetchTimes = () => {
         }
 
         dispatch(fetchTimesSuccess(fetchedTimes));
-        console.log(fetchedTimes);
       })
       .catch(err => {
         dispatch(fetchTimesFail(err));
