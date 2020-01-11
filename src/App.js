@@ -22,13 +22,7 @@ function App() {
   );
   return (
     <div>
-      <div
-        style={{
-          height: "60px",
-          // overflow: "hidden",
-          backgroundColor: "#555555"
-        }}
-      >
+      <div className={classes.navBar}>
         <div className={classes.social}>
           <FontAwesomeIcon
             className={`${classes.FontAwesomeIcon} ${classes.facebook}`}

@@ -33,7 +33,7 @@ export const fetchScreens = ({ date, time, screen }) => {
           fetchedScreens.push(res.data[key]);
         }
 
-        if (screen == "screen1") {
+        if (screen === "screen1") {
           for (let i = 0; i < fetchedScreens[0][0].length; i++) {
             if (
               fetchedScreens[0][0][i].Date == date &&
@@ -43,30 +43,30 @@ export const fetchScreens = ({ date, time, screen }) => {
             }
           }
         }
-        if (screen == "screen2") {
-          for (let i = 0; i < fetchedScreens[0][1][i].length; i++) {
+        if (screen === "screen2") {
+          for (let i = 0; i < fetchedScreens[0][1].length; i++) {
             if (
-              fetchedScreens[0][1][i].date === date &&
+              fetchedScreens[0][0][i].Date == date &&
               fetchedScreens[0][1][i].time === time
             ) {
               seats = fetchedScreens[0][1][i].seats;
             }
           }
         }
-        if (screen == "screen3") {
+        if (screen === "screen3") {
           for (let i = 0; i < fetchedScreens[0][2].length; i++) {
             if (
-              fetchedScreens[0][2][i].date === date &&
+              fetchedScreens[0][0][i].Date == date &&
               fetchedScreens[0][2][i].time === time
             ) {
               seats = fetchedScreens[0][2][i].seats;
             }
           }
         }
-        if (screen == "screen4") {
+        if (screen === "screen4") {
           for (let i = 0; i < fetchedScreens[0][3].length; i++) {
             if (
-              fetchedScreens[0][3][i].date === date &&
+              fetchedScreens[0][0][i].Date == date &&
               fetchedScreens[0][3][i].time === time
             ) {
               seats = fetchedScreens[0][3][i].seats;

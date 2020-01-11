@@ -42,3 +42,15 @@ body {
   padding: 0;
   position: relative;
 }
+@media (max-width: 800px) {
+  .gridContainer {
+    grid-template-columns: 300px 400px;
+    grid-template-rows: 600px;
+  }
+}
+@media (max-width: 450px) {
+  .gridContainer {
+    grid-template-columns: 400px;
+    grid-template-rows: 600px;
+  }
+}

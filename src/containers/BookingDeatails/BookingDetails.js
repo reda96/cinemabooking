@@ -292,8 +292,7 @@ class BookingDetails extends Component {
           <div>
             <Poster
               imgUrl={imagesArray[this.props.counter]}
-              width="225px"
-              height="340px"
+              classes={classes.poster}
             />
           </div>
           <div></div>
@@ -328,7 +327,7 @@ class BookingDetails extends Component {
     }
     return (
       <div className={classes.container}>
-        {gridContainer}
+        <div>{gridContainer}</div>
         <hr style={{ width: "800px", marginTop: "40px" }}></hr>
         <Button
           classes={classes.Next}

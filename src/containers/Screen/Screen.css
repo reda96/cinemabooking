@@ -74,7 +74,7 @@ li {
 }
 .singleBookingRow {
   border-bottom: 1px dashed #ddd;
-  width: 70%;
+  width: 800px;
   position: relative;
   display: grid;
   grid-template-columns: 1fr 11fr 1fr;
@@ -97,4 +97,16 @@ li {
 .rowKey {
   color: #777777;
   border: 1px solid transparent;
+}
+@media (max-width: 650px) {
+  .seatingSample {
+    display: block;
+  }
+  .seatingSamples {
+    height: 200px;
+  }
+  .list {
+    text-align: end;
+    padding-right: 80px;
+  }
 }

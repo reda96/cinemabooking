@@ -23,14 +23,19 @@ class Home extends Component {
     films: [
       // {
       //   img:
-      //     "http://photo.elcinema.com.s3.amazonaws.com/uploads/_480x640_ea3e8af4ee343ec8a7a9d9a81889eed8a9bbdacef735cd1b41b80f3aa4899922.jpg",
-      //   name: "Jumanji: The Next Level",
-      //   rating: 8,
-      //   type: "Adventure, Action, Comedy, Fantasy ",
-      //   duration: " 114 mins",
-      //   actors: ["Dwayne Johnson", "Karen Gillan", "Jack Black", "Kevin Hart"],
+      //     "http://photo.elcinema.com.s3.amazonaws.com/uploads/_480x640_3ed33b54d3456d4b261b2be063fd098284b97a140b7f051d75ac4ad443f99bc5.jpg",
+      //   name: "1917",
+      //   rating: 5,
+      //   type: "Drama, War",
+      //   duration: "119 mins",
+      //   actors: [
+      //     "Dean-Charles Chapman",
+      //     "George MacKay",
+      //     "Benedict Cumberbatch",
+      //     "Andrew Scott"
+      //   ],
       //   description:
-      //     "Spencer secretly kept the pieces of the Jumanji game and, despite the previous adventure, he decides to repair its system in his grandfather's basement. His friends, Bethany, Fridge, and Martha re-enter Jumanji to rescue him, to find that Spencer’s grandfather and his friend got drawn in too. From arid deserts to snowy mountains, the players must play to escape the world’s most dangerous game.",
+      //     "During World War I, two British soldiers go on an impossible mission, where they must enter the enemy territory, to deliver a message to prevent their beleaguered troops from marching towards a deadly trap.",
       //   prices: [{ time: "00:45", price: "100.0 EGP" }]
       // }
     ],
@@ -39,6 +44,9 @@ class Home extends Component {
   };
   componentDidMount() {
     this.props.onFetchFilms();
+    // axios
+    //   .post("./films.json", this.state.films[0])
+    //   .then(res => console.log(res));
   }
   handleRightShift = () => {
     if (this.props.counter < this.props.films.length - 1) {

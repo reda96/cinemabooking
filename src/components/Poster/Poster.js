@@ -5,6 +5,7 @@ const poster = props => (
     <img
       onClick={props.clicked}
       src={props.imgUrl}
+      className={props.classes}
       style={{
         width: props.width,
         height: props.height,
