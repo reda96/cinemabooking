@@ -1,3 +1,4 @@
 export { fetchFilms, chooseFilm } from "./films";
 export { fetchTimes, choosenDetails } from "./bookingDetails";
-export { fetchScreens } from "./screens";
+export { fetchScreens, bookSeat } from "./screens";
+export { auth, logout, setAuthRedirectPath, authCheckState } from "./auth";

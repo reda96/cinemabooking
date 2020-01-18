@@ -3,6 +3,10 @@ import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import * as actions from "../../store/actions/auth";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+import classes from "./LogIn.css";
 class LogIn extends Component {
   state = {
     controls: {
@@ -34,9 +38,14 @@ class LogIn extends Component {
         valid: false,
         touched: false
       }
-    }
+    },
+    isSignUp: true
   };
-
+  componentDidMount() {
+    if (this.props.authRedirectPath !== "/") {
+      this.props.onSetAuhRedirectPath();
+    }
+  }
   checkValidity = (value, rules) => {
     let isValid = true;
 
@@ -69,8 +78,13 @@ class LogIn extends Component {
     };
     this.setState({ controls: updatedControls });
   };
+  switchSignUp = () => {
+    this.setState(prevState => {
+      return { isSignUp: !prevState.isSignUp };
+    });
+  };
   submitHandler = event => {
-    event.preventDefault();
+    // event.preventDefault();
 
     this.props.onAuth(
       this.state.controls.email.value,
@@ -119,13 +133,37 @@ class LogIn extends Component {
         />
       </div>
     ));
+    let authRedirect = null;
+    if (this.props.isAuthenticated) {
+      authRedirect = <Redirect to={this.props.authRedirectPath} />;
+    }
     return (
-      <form onSubmit={this.submitHandler} style={{ width: "300px" }}>
-        {form}
-        <Button btnType="Submit">SUBMIT</Button>
-        <Button btnType="Register">REGISTER</Button>
-      </form>
+      <div className={classes.Auth}>
+        {/* {authRedirect} */}
+        <form onSubmit={this.submitHandler} style={{ width: "300px" }}>
+          {form}
+          <Button btnType="Submit">SUBMIT</Button>
+        </form>
+        <Button btnType="Danger" clicked={this.switchSignUp}>
+          SWITCH TO {this.state.isSignUp ? "SIGNIN" : "SIGNUP"}
+        </Button>
+      </div>
     );
   }
 }
-export default LogIn;
+const mapStateToProps = state => {
+  return {
+    loading: state.auth.loading,
+    error: state.auth.error,
+    isAuthenticated: state.auth.token !== null,
+    authRedirectPath: state.auth.authRedirectPath
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    onAuth: (email, password, isSignUp) =>
+      dispatch(actions.auth(email, password, isSignUp)),
+    onSetAuhRedirectPath: () => dispatch(actions.setAuthRedirectPath("/"))
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(LogIn);

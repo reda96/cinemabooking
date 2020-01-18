@@ -6,9 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import Modal from "../../components/UI/Model/Model";
+
 import Films from "../../components/Films/Films";
-import LOGIN from "../Auth/LogIn";
+
 import axios from "../../axios-orders";
 import imagesArray from "../../assets/images";
 import { withRouter } from "react-router-dom";
@@ -18,8 +18,7 @@ library.add(fab, faSearch);
 class Home extends Component {
   state = {
     filmsList: [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }],
-    showSearchBar: false,
-    showLogInForm: false,
+
     films: [
       // {
       //   img:
@@ -59,21 +58,6 @@ class Home extends Component {
     }
   };
   render() {
-    let searchBar = (
-      <div className={classes.Input}>
-        <input
-          className={classes.InputElement}
-          style={{
-            height: "40px",
-            width: "100%",
-            zIndex: 1000,
-            float: "right"
-          }}
-          placeholder="SEARCH"
-        />
-      </div>
-    );
-    let logInForm = <LOGIN />;
     let gridContainer = null;
     let films = null;
     if (this.props.films.length) {
@@ -107,46 +91,6 @@ class Home extends Component {
     }
     return (
       <Auxiliary>
-        <div className={classes.main}>
-          <div
-            style={{
-              height: "50px",
-              overflow: "visible",
-              boxShadow: "0 2px 4px 0",
-              width: "100%"
-            }}
-          >
-            <ul className={classes.navbar}>
-              <li onClick={() => this.setState({ showSearchBar: true })}>
-                <a>
-                  <FontAwesomeIcon icon={faSearch} />
-                </a>
-              </li>
-              <li>
-                <a href="#home">Home</a>
-              </li>
-              <li onClick={() => this.setState({ showLogInForm: true })}>
-                <a href="#login">LOGIN</a>
-              </li>
-              <li>
-                <a href="#about">About</a>
-              </li>
-            </ul>
-            <Modal
-              show={this.state.showSearchBar}
-              clicked={() => this.setState({ showSearchBar: false })}
-            >
-              {searchBar}
-            </Modal>
-            <Modal
-              show={this.state.showLogInForm}
-              clicked={() => this.setState({ showLogInForm: false })}
-            >
-              {logInForm}
-            </Modal>
-          </div>
-        </div>
-
         <div
           style={{
             backgroundColor: "#383838",

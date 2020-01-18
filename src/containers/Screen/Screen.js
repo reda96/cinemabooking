@@ -1,7 +1,6 @@
 import classes from "./Screen.css";
 import SeatsRow from "../../components/seatsRow/seatsRow";
 import React, { Component } from "react";
-import seatsRow from "../../components/seatsRow/seatsRow";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
@@ -256,7 +255,15 @@ class Screen extends Component {
           <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
             <div className={`${classes.seat} ${classes.rowKey}`}>A</div>
             <div>
-              <SeatsRow seats={this.state.seats} N="A" />
+              <SeatsRow
+                seats={this.props.seats}
+                bookSeat={this.props.onBookSeat}
+                N="A"
+                screenNumber={this.props.selectedScreen}
+                date={this.props.selectedDate}
+                time={this.props.selectedTime}
+                film={this.props.selectedFilm}
+              />
             </div>
             <div className={`${classes.seat} ${classes.rowKey}`}>A</div>
           </div>
@@ -264,7 +271,15 @@ class Screen extends Component {
           <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
             <div className={`${classes.seat} ${classes.rowKey}`}>B</div>
             <div>
-              <SeatsRow seats={this.state.seats} N="B" />
+              <SeatsRow
+                seats={this.props.seats}
+                bookSeat={() => this.props.onBookSeat()}
+                N="B"
+                screenNumber={this.props.selectedScreen}
+                date={this.props.selectedDate}
+                time={this.props.selectedTime}
+                film={this.props.selectedFilm}
+              />
             </div>
             <div className={`${classes.seat} ${classes.rowKey}`}>B</div>
           </div>
@@ -272,7 +287,15 @@ class Screen extends Component {
           <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
             <div className={`${classes.seat} ${classes.rowKey}`}>C</div>
             <div>
-              <SeatsRow seats={this.state.seats} N="C" />
+              <SeatsRow
+                seats={this.props.seats}
+                bookSeat={() => this.props.onBookSeat()}
+                N="C"
+                screenNumber={this.props.selectedScreen}
+                date={this.props.selectedDate}
+                time={this.props.selectedTime}
+                film={this.props.selectedFilm}
+              />
             </div>
             <div className={`${classes.seat} ${classes.rowKey}`}>C</div>
           </div>
@@ -280,7 +303,15 @@ class Screen extends Component {
           <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
             <div className={`${classes.seat} ${classes.rowKey}`}>D</div>
             <div>
-              <SeatsRow seats={this.state.seats} N="D" />
+              <SeatsRow
+                seats={this.props.seats}
+                bookSeat={() => this.props.onBookSeat()}
+                N="D"
+                screenNumber={this.props.selectedScreen}
+                date={this.props.selectedDate}
+                time={this.props.selectedTime}
+                film={this.props.selectedFilm}
+              />
             </div>
             <div className={`${classes.seat} ${classes.rowKey}`}>D</div>
           </div>
@@ -288,7 +319,15 @@ class Screen extends Component {
           <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
             <div className={`${classes.seat} ${classes.rowKey}`}>E</div>
             <div>
-              <SeatsRow seats={this.state.seats} N="E" />
+              <SeatsRow
+                seats={this.props.seats}
+                bookSeat={() => this.props.onBookSeat()}
+                N="E"
+                screenNumber={this.props.selectedScreen}
+                date={this.props.selectedDate}
+                time={this.props.selectedTime}
+                film={this.props.selectedFilm}
+              />
             </div>
             <div className={`${classes.seat} ${classes.rowKey}`}>E</div>
           </div>
@@ -296,7 +335,15 @@ class Screen extends Component {
           <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
             <div className={`${classes.seat} ${classes.rowKey}`}>F</div>
             <div>
-              <SeatsRow seats={this.state.seats} N="F" />
+              <SeatsRow
+                seats={this.props.seats}
+                bookSeat={() => this.props.onBookSeat()}
+                N="F"
+                screenNumber={this.props.selectedScreen}
+                date={this.props.selectedDate}
+                time={this.props.selectedTime}
+                film={this.props.selectedFilm}
+              />
             </div>
             <div className={`${classes.seat} ${classes.rowKey}`}>F</div>
           </div>
@@ -304,28 +351,60 @@ class Screen extends Component {
           <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
             <div className={`${classes.seat} ${classes.rowKey}`}>G</div>
             <div>
-              <SeatsRow seats={this.state.seats} N="G" />
+              <SeatsRow
+                seats={this.props.seats}
+                bookSeat={() => this.props.onBookSeat()}
+                N="G"
+                screenNumber={this.props.selectedScreen}
+                date={this.props.selectedDate}
+                time={this.props.selectedTime}
+                film={this.props.selectedFilm}
+              />
             </div>
             <div className={`${classes.seat} ${classes.rowKey}`}>G</div>
           </div>
           <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
             <div className={`${classes.seat} ${classes.rowKey}`}>H</div>
             <div>
-              <SeatsRow seats={this.state.seats} N="H" />
+              <SeatsRow
+                seats={this.props.seats}
+                bookSeat={() => this.props.onBookSeat()}
+                N="H"
+                screenNumber={this.props.selectedScreen}
+                date={this.props.selectedDate}
+                time={this.props.selectedTime}
+                film={this.props.selectedFilm}
+              />
             </div>
             <div className={`${classes.seat} ${classes.rowKey}`}>H</div>
           </div>
           <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
             <div className={`${classes.seat} ${classes.rowKey}`}>I</div>
             <div>
-              <SeatsRow seats={this.state.seats} N="I" />
+              <SeatsRow
+                seats={this.props.seats}
+                bookSeat={() => this.props.onBookSeat()}
+                N="I"
+                screenNumber={this.props.selectedScreen}
+                date={this.props.selectedDate}
+                time={this.props.selectedTime}
+                film={this.props.selectedFilm}
+              />
             </div>
             <div className={`${classes.seat} ${classes.rowKey}`}>I</div>
           </div>
           <div className={`${classes.singleBookingRow} ${classes.bookingRow}`}>
             <div className={`${classes.seat} ${classes.rowKey}`}>J</div>
             <div>
-              <SeatsRow seats={this.state.seats} N="J" />
+              <SeatsRow
+                seats={this.props.seats}
+                bookSeat={() => this.props.onBookSeat()}
+                N="J"
+                screenNumber={this.props.selectedScreen}
+                date={this.props.selectedDate}
+                time={this.props.selectedTime}
+                film={this.props.selectedFilm}
+              />
             </div>
             <div className={`${classes.seat} ${classes.rowKey}`}>J</div>
           </div>
@@ -375,6 +454,9 @@ const mapDispatchToProps = dispatch => {
   return {
     onFetchScreen: details => {
       dispatch(actions.fetchScreens(details));
+    },
+    onBookSeat: details => {
+      dispatch(actions.bookSeat(details));
     }
   };
 };

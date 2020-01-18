@@ -1,4 +1,12 @@
 import React from "react";
 import classes from "./Spinner.css";
-const spinner = () => <div className={classes.Loader}>Loading...</div>;
+
+const spinner = props => (
+  <div
+    className={classes.Loader}
+    style={{ height: props.height, width: props.width }}
+  >
+    Loading...
+  </div>
+);
 export default spinner;

@@ -273,7 +273,22 @@ class BookingDetails extends Component {
         <select
           className={classes.Select}
           defaultValue={this.state.screen}
-          onChange={e => this.setState({ screen: e.target.value })}
+          onChange={e => {
+            switch (e.target.value) {
+              case "screen1":
+                this.setState({ screen: 0 });
+                break;
+              case "screen2":
+                this.setState({ screen: 1 });
+                break;
+              case "screen3":
+                this.setState({ screen: 2 });
+                break;
+              case "screen4":
+                this.setState({ screen: 3 });
+                break;
+            }
+          }}
         >
           <option value="DEFAULT" disabled hidden>
             Choose Screen{" "}
@@ -336,7 +351,7 @@ class BookingDetails extends Component {
               date: this.state.date,
               time: this.state.time,
               screen: this.state.screen,
-              name: this.props.films[this.props.counter].name
+              filmName: this.props.films[this.props.counter].name
             });
             this.props.history.replace("/screen");
           }}

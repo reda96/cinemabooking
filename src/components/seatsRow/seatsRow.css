@@ -8,7 +8,8 @@
 .available:hover {
   background-color: #999;
 }
-.yourSeat {
+
+.booked {
   border-color: #25a9df;
   background-color: #25a9df;
 }
