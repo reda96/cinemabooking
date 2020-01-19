@@ -18,11 +18,7 @@ export const fetchScreensFail = error => {
     error: error
   };
 };
-export const bookSeatSuccess = () => {
-  return {
-    type: actionTypes.BOOK_SEAT_SUCCESS
-  };
-};
+
 export const fetchScreens = ({ date, time, screen }) => {
   return dispatch => {
     dispatch(fetchScreensStart());
@@ -65,6 +61,7 @@ export const fetchScreens = ({ date, time, screen }) => {
               fetchedScreens[0][2][i].time === time
             ) {
               seats = fetchedScreens[0][2][i].seats;
+              console.log(seats);
             }
           }
         }
@@ -85,57 +82,88 @@ export const fetchScreens = ({ date, time, screen }) => {
       });
   };
 };
-
-export const bookSeat = ({ screenNumber, date, time, film, N, key }) => {
+export const bookSeatStart = () => {
+  return {
+    type: actionTypes.BOOK_SEAT_START,
+    loading: true
+  };
+};
+export const bookSeatSuccess = seats => {
+  return {
+    type: actionTypes.BOOK_SEAT_SUCCESS,
+    seats: seats
+  };
+};
+export const bookSeatFail = error => {
+  return {
+    type: actionTypes.BOOK_SEAT_FAIL,
+    error: error
+  };
+};
+export const bookSeat = ({ screenNumber, date, time, film, N, key, value }) => {
   return dispatch => {
-    axios.get("/screens.json").then(res => {
-      let fetchedScreens = [];
-      fetchedScreens = res.data;
-      console.log(date + " " + time + " " + film + " " + screenNumber);
+    dispatch(bookSeatStart());
+    axios
+      .get("/screens.json")
+      .then(res => {
+        let fetchedScreens = [];
+        fetchedScreens = res.data;
+        console.log(date + " " + time + " " + film + " " + screenNumber);
 
-      let index = -1;
-      Object.keys(fetchedScreens["-LyA4Sdi8S2klq_CVN8P"][screenNumber]).map(
-        key => {
-          if (
-            fetchedScreens["-LyA4Sdi8S2klq_CVN8P"][screenNumber][key][
-              "Date"
-            ] === date &&
-            fetchedScreens["-LyA4Sdi8S2klq_CVN8P"][screenNumber][key][
-              "time"
-            ] === time &&
-            fetchedScreens["-LyA4Sdi8S2klq_CVN8P"][screenNumber][key][
-              "film"
-            ] === film
-          ) {
-            index = key;
+        let index = -1;
+        Object.keys(fetchedScreens["-LyA4Sdi8S2klq_CVN8P"][screenNumber]).map(
+          key => {
+            if (
+              fetchedScreens["-LyA4Sdi8S2klq_CVN8P"][screenNumber][key][
+                "Date"
+              ] === date &&
+              fetchedScreens["-LyA4Sdi8S2klq_CVN8P"][screenNumber][key][
+                "time"
+              ] === time &&
+              fetchedScreens["-LyA4Sdi8S2klq_CVN8P"][screenNumber][key][
+                "film"
+              ] === film
+            ) {
+              index = key;
+            }
           }
-        }
-      );
-      key = parseInt(key) + 1;
-      let value = key;
-      if (value == 10 && N != "J") {
-        value = 0;
-      }
-      axios
-        .put(
-          "screens/-LyA4Sdi8S2klq_CVN8P/" +
-            screenNumber +
-            "/" +
-            index +
-            "/seats" +
-            "/" +
-            N +
-            "/" +
-            key +
-            ".json",
-          { status: "booked", value: value }
-        )
-        .then(res => {
-          console.log(res);
+        );
 
-          dispatch(bookSeatSuccess());
-        });
-    });
+        axios
+          .put(
+            "screens/-LyA4Sdi8S2klq_CVN8P/" +
+              screenNumber +
+              "/" +
+              index +
+              "/seats" +
+              "/" +
+              N +
+              "/" +
+              key +
+              ".json",
+            { status: "booked", value: value }
+          )
+          .then(res => {
+            console.log(res);
+            axios
+              .get(
+                "screens/-LyA4Sdi8S2klq_CVN8P/" +
+                  screenNumber +
+                  "/" +
+                  index +
+                  "/seats.json"
+              )
+              .then(res => {
+                dispatch(bookSeatSuccess(res.data));
+              });
+          })
+          .catch(err => {
+            dispatch(bookSeatFail(err));
+          });
+      })
+      .catch(err => {
+        dispatch(bookSeatFail(err));
+      });
   };
 };
 export const choosenScreen = choosenScreen => {

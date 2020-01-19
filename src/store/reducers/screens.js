@@ -12,7 +12,11 @@ const reducer = (state = initialState, action) => {
       return updateObject(state, { loading: true });
     case actionTypes.FETCH_SCREENS_FAIL:
       return updateObject(state, { loading: false });
+    case actionTypes.BOOK_SEAT_START:
+      return updateObject(state, { loading: true });
     case actionTypes.BOOK_SEAT_SUCCESS:
+      return updateObject(state, { seats: action.seats, loading: false });
+    case actionTypes.BOOK_SEAT_FAIL:
       return updateObject(state, { loading: false });
     default:
       return state;

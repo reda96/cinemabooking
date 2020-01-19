@@ -1,66 +1,71 @@
 import React from "react";
 import classes from "./seatsRow.css";
 import Spinner2 from "../UI/Spinner/Spinner2";
-const seatsRow = props => {
-  props.seats[props.N].splice(0, 1);
-  return Object.keys(props.seats[props.N]).map(key => {
-    let loading = true;
-    console.log(
-      props.screenNumber,
-      props.date,
-      props.time,
-      props.film,
-      props.N
-    );
+import { connect } from "react-redux";
+class seatsRow extends React.Component {
+  render() {
+    // console.log();
 
-    switch (props.seats[props.N][parseInt(key)].status) {
-      case "available":
-        return (
-          <div
-            key={key}
-            onClick={() =>
-              props.bookSeat({
-                screenNumber: props.screenNumber,
-                date: props.date,
-                time: props.time,
-                film: props.film,
-                N: props.N,
-                key
-              })
-            }
-            className={`${classes.seat} ${classes.available} `}
-          >
-            {loading ? <Spinner2 /> : props.seats[props.N][key].value}
-          </div>
-        );
-      case "booked":
-        return (
-          <div
-            key={key}
-            className={`${classes.seat} ${classes.available} `}
-          ></div>
-        );
-    }
-    return props.seats[props.N][parseInt(key)].status === "available" ? (
-      <div
-        key={key}
-        onClick={() =>
-          props.bookSeat({
-            screenNumber: props.screenNumber,
-            date: props.date,
-            time: props.time,
-            film: props.film,
-            N: props.N,
-            key
-          })
+    // this.props.seats[this.props.N].splice(0, 1);
+    return Object.keys(this.props.seats[this.props.N]).map(key => {
+      console.log(
+        this.props.screenNumber,
+        this.props.date,
+        this.props.time,
+        this.props.film,
+        this.props.N
+      );
+      if (this.props.seats[this.props.N][parseInt(key)] != null) {
+        if (
+          this.props.seats[this.props.N][parseInt(key)].status === "available"
+        ) {
+          return (
+            <div
+              key={key}
+              onClick={() =>
+                this.props.bookSeat({
+                  screenNumber: this.props.screenNumber,
+                  date: this.props.date,
+                  time: this.props.time,
+                  film: this.props.film,
+                  N: this.props.N,
+                  key,
+                  value: this.props.seats[this.props.N][key].value
+                })
+              }
+              className={`${classes.seat} ${classes.available} `}
+            >
+              {this.props.loading ? (
+                <Spinner2 />
+              ) : (
+                this.props.seats[this.props.N][key].value
+              )}
+            </div>
+          );
+        } else if (
+          this.props.seats[this.props.N][parseInt(key)].status === "booked"
+        ) {
+          return (
+            <div key={key} className={`${classes.seat} ${classes.booked} `}>
+              {" "}
+              {this.props.loading ? (
+                <Spinner2 />
+              ) : (
+                this.props.seats[this.props.N][key].value
+              )}
+            </div>
+          );
+        } else {
+          return <div key={key} className={classes.space}></div>;
         }
-        className={`${classes.seat} ${classes.available} `}
-      >
-        {loading ? <Spinner2 /> : props.seats[props.N][key].value}
-      </div>
-    ) : (
-      <div key={key} className={classes.space}></div>
-    );
-  });
+      }
+    });
+  }
+}
+const mapStateToProps = state => {
+  return {
+    loading: state.screens.loading,
+    seats: state.screens.seats
+  };
 };
-export default seatsRow;
+export default connect(mapStateToProps)(seatsRow);

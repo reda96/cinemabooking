@@ -273,7 +273,7 @@ class Screen extends Component {
             <div>
               <SeatsRow
                 seats={this.props.seats}
-                bookSeat={() => this.props.onBookSeat()}
+                bookSeat={this.props.onBookSeat}
                 N="B"
                 screenNumber={this.props.selectedScreen}
                 date={this.props.selectedDate}
@@ -289,7 +289,7 @@ class Screen extends Component {
             <div>
               <SeatsRow
                 seats={this.props.seats}
-                bookSeat={() => this.props.onBookSeat()}
+                bookSeat={this.props.onBookSeat}
                 N="C"
                 screenNumber={this.props.selectedScreen}
                 date={this.props.selectedDate}
@@ -305,7 +305,7 @@ class Screen extends Component {
             <div>
               <SeatsRow
                 seats={this.props.seats}
-                bookSeat={() => this.props.onBookSeat()}
+                bookSeat={this.props.onBookSeat}
                 N="D"
                 screenNumber={this.props.selectedScreen}
                 date={this.props.selectedDate}
@@ -321,7 +321,7 @@ class Screen extends Component {
             <div>
               <SeatsRow
                 seats={this.props.seats}
-                bookSeat={() => this.props.onBookSeat()}
+                bookSeat={this.props.onBookSeat}
                 N="E"
                 screenNumber={this.props.selectedScreen}
                 date={this.props.selectedDate}
@@ -337,7 +337,7 @@ class Screen extends Component {
             <div>
               <SeatsRow
                 seats={this.props.seats}
-                bookSeat={() => this.props.onBookSeat()}
+                bookSeat={this.props.onBookSeat}
                 N="F"
                 screenNumber={this.props.selectedScreen}
                 date={this.props.selectedDate}
@@ -353,7 +353,7 @@ class Screen extends Component {
             <div>
               <SeatsRow
                 seats={this.props.seats}
-                bookSeat={() => this.props.onBookSeat()}
+                bookSeat={this.props.onBookSeat}
                 N="G"
                 screenNumber={this.props.selectedScreen}
                 date={this.props.selectedDate}
@@ -368,7 +368,7 @@ class Screen extends Component {
             <div>
               <SeatsRow
                 seats={this.props.seats}
-                bookSeat={() => this.props.onBookSeat()}
+                bookSeat={this.props.onBookSeat}
                 N="H"
                 screenNumber={this.props.selectedScreen}
                 date={this.props.selectedDate}
@@ -383,7 +383,7 @@ class Screen extends Component {
             <div>
               <SeatsRow
                 seats={this.props.seats}
-                bookSeat={() => this.props.onBookSeat()}
+                bookSeat={this.props.onBookSeat}
                 N="I"
                 screenNumber={this.props.selectedScreen}
                 date={this.props.selectedDate}
@@ -397,8 +397,7 @@ class Screen extends Component {
             <div className={`${classes.seat} ${classes.rowKey}`}>J</div>
             <div>
               <SeatsRow
-                seats={this.props.seats}
-                bookSeat={() => this.props.onBookSeat()}
+                bookSeat={this.props.onBookSeat}
                 N="J"
                 screenNumber={this.props.selectedScreen}
                 date={this.props.selectedDate}
