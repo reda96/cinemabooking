@@ -119,14 +119,12 @@ class Home extends Component {
       <Auxiliary>
         <div
           style={{
-            backgroundColor: "#383838",
             width: "100%",
             height: "auto"
           }}
         >
           <div
             style={{
-              margin: "0 auto",
               paddingTop: "30px"
             }}
             className={classes.films}

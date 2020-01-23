@@ -106,14 +106,12 @@
 }
 
 .navbar {
-  padding: 35px;
+  padding: 0px;
+  margin: 0px;
 }
 ul {
   list-style-type: none;
-
-  margin: 0px;
-  padding: 0;
-  background-color: #fff;
+  line-height: 300%;
 }
 /* .facebook {
   color: #3b5998;
@@ -142,13 +140,12 @@ li {
 }
 
 li a {
-  color: white;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 
   cursor: pointer;
-  color: #111;
+  color: #dddddd;
   text-transform: uppercase;
   font-family: FSAlbert, Cairo;
   font-weight: 700;
@@ -156,7 +153,7 @@ li a {
 }
 
 li a:hover {
-  background-color: #d2d2d2;
+  background-color: hsla(0, 0%, 82%, 0.014);
 }
 
 .Input {

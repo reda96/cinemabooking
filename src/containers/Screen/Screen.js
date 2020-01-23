@@ -4,6 +4,12 @@ import React, { Component } from "react";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
+import {
+  faChevronLeft,
+  faChevronRight
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Button from "../../components/UI/Button/Button";
 class Screen extends Component {
   state = {
     fetchedTimes: [],
@@ -436,6 +442,25 @@ class Screen extends Component {
           </ul>
         </div>
         {Screen}
+
+        <hr style={{ width: "800px", marginTop: "40px" }}></hr>
+        <Button
+          classes={classes.Next}
+          //   clicked={() => {
+          //     this.props.onChoosenDetails({
+          //       date: this.state.date,
+          //       time: this.state.time,
+          //       screen: this.state.screen,
+          //       filmName: this.props.films[this.props.counter].name
+          //     });
+          //     this.props.history.replace("/screen");
+          //   }}
+        >
+          next <FontAwesomeIcon icon={faChevronRight} />
+        </Button>
+        <Button classes={classes.previous}>
+          <FontAwesomeIcon icon={faChevronLeft} /> previous
+        </Button>
       </div>
     );
   }

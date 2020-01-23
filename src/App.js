@@ -4,6 +4,7 @@ import "./App.css";
 import Home from "./containers/Home/Home";
 import Screen from "./containers/Screen/Screen";
 import BookingDetails from "./containers/BookingDeatails/BookingDetails";
+import UserInfo from "./containers/UserInfo/UserInfo";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -37,6 +38,7 @@ class App extends React.Component {
       <Switch>
         <Route path="/screen" component={Screen} />
         <Route path="/bookingDetails" component={BookingDetails} />
+        <Route path="/userInfo" component={UserInfo} />
         <Route path="/" exact component={Home} />
         <Redirect to="/" />
       </Switch>
@@ -58,7 +60,7 @@ class App extends React.Component {
     let logInForm = <LOGIN />;
 
     return (
-      <div>
+      <div style={{ backgroundColor: "#D9D9D9", height: "100%" }}>
         <div className={classes.navBar}>
           <div className={classes.social}>
             <FontAwesomeIcon
@@ -85,7 +87,8 @@ class App extends React.Component {
               height: "50px",
               overflow: "visible",
               boxShadow: "0 2px 4px 0",
-              width: "100%"
+              width: "100%",
+              backgroundColor: "#555555"
             }}
           >
             <ul className={classes.navbar}>
@@ -123,7 +126,9 @@ class App extends React.Component {
             </Modal>
           </div>
         </div>
-        <Layout>{routes}</Layout>
+        <div style={{ margin: "0 30px" }}>
+          <Layout>{routes}</Layout>
+        </div>
       </div>
     );
   }

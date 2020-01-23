@@ -94,6 +94,36 @@ li {
 
   border-radius: 3px;
 }
+
+.Next {
+  background-color: #f39c11;
+  color: white;
+  float: right;
+  margin-right: 300px;
+  border-color: #df8d0b;
+  border-style: solid;
+  font-size: 15px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.previous {
+  background-color: #f39c11;
+  color: white;
+  float: left;
+  margin-right: 300px;
+  border-color: #df8d0b;
+  border-style: solid;
+  font-size: 15px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.Next .previous:hover {
+  background-color: #ad6608;
+}
+.Next .previous {
+  border-color: #df8d0b;
+}
+
 .rowKey {
   color: #777777;
   border: 1px solid transparent;

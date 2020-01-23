@@ -1,0 +1,43 @@
+.sectionTitle {
+  display: inline-block;
+}
+
+.sectionTitle {
+  font-family: "Droid Arabic Naskh", Tahoma, Verdana, serif;
+  color: #25a9df;
+  font-weight: bold;
+}
+.previous {
+  background-color: #f39c11;
+  color: white;
+  float: left;
+
+  border-color: #df8d0b;
+  border-style: solid;
+  font-size: 15px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.Next .previous:hover {
+  background-color: #ad6608;
+}
+.Next .previous {
+  border-color: #df8d0b;
+}
+.Next {
+  background-color: #f39c11;
+  color: white;
+  float: right;
+  margin-right: 300px;
+  border-color: #df8d0b;
+  border-style: solid;
+  font-size: 15px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.Next:hover {
+  background-color: #ad6608;
+}
+.Next {
+  border-color: #df8d0b;
+}
