@@ -43,7 +43,7 @@ class LogIn extends Component {
   };
   componentDidMount() {
     if (this.props.authRedirectPath !== "/") {
-      this.props.onSetAuhRedirectPath();
+      // this.props.onSetAuhRedirectPath();
     }
   }
   checkValidity = (value, rules) => {
@@ -84,13 +84,15 @@ class LogIn extends Component {
     });
   };
   submitHandler = event => {
-    // event.preventDefault();
+    event.preventDefault();
 
     this.props.onAuth(
       this.state.controls.email.value,
       this.state.controls.password.value,
       this.state.isSignUp
     );
+    this.props.onHideLogInForm();
+    console.log(this.state.controls.email.value);
   };
   render() {
     const formElementsArray = [];
@@ -133,10 +135,7 @@ class LogIn extends Component {
         />
       </div>
     ));
-    let authRedirect = null;
-    if (this.props.isAuthenticated) {
-      authRedirect = <Redirect to={this.props.authRedirectPath} />;
-    }
+
     return (
       <div className={classes.Auth}>
         {/* {authRedirect} */}
@@ -163,7 +162,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onAuth: (email, password, isSignUp) =>
       dispatch(actions.auth(email, password, isSignUp)),
-    onSetAuhRedirectPath: () => dispatch(actions.setAuthRedirectPath("/"))
+    onSetAuhRedirectPath: () => dispatch(actions.setAuthRedirectPath("/")),
+    onHideLogInForm: () => dispatch(actions.hideLogInForm())
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(LogIn);

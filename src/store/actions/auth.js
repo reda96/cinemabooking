@@ -5,7 +5,11 @@ export const authStart = () => {
 };
 
 export const authSuccess = (token, userId) => {
-  return { type: actionTypes.AUTH_SUCCESS, idToken: token, userId: userId };
+  return {
+    type: actionTypes.AUTH_SUCCESS,
+    idToken: token,
+    userId: userId
+  };
 };
 
 export const authFail = error => {
@@ -15,6 +19,7 @@ export const logout = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("expirationDate");
   localStorage.removeItem("localId");
+  localStorage.removeItem("email");
   return { type: actionTypes.AUTH_LOGOUT };
 };
 export const checkAuthTimeout = expirationTime => {
@@ -49,7 +54,7 @@ export const auth = (email, password, isSignUp) => {
         localStorage.setItem("expirationDate", expirationDate);
         localStorage.setItem("token", res.data.idToken);
         localStorage.setItem("localId", res.data.localId);
-
+        localStorage.setItem("email", authData.email);
         dispatch(authSuccess(res.data.idToken, res.data.localId));
         dispatch(checkAuthTimeout(res.data.expiresIn));
       })
@@ -58,6 +63,12 @@ export const auth = (email, password, isSignUp) => {
         dispatch(authFail(err.response.data.error));
       });
   };
+};
+export const showLogInForm = () => {
+  return { type: actionTypes.SHOW_LOGIN_FORM };
+};
+export const hideLogInForm = () => {
+  return { type: actionTypes.HIDE_LOGIN_FORM };
 };
 export const setAuthRedirectPath = path => {
   return {

@@ -1,3 +1,16 @@
+.films {
+  animation: smooth 1s ease-in;
+}
+
+@keyframes smooth {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .wholePage {
   /* background-color: #d9d9d9; */
 }

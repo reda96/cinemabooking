@@ -5,6 +5,8 @@ import Auxiliary from "././../../hoc/Auxiliary";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../components/UI/Button/Button";
 import imagesArray from "../../assets/images";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import {
   faChevronRight,
   faPlay,
@@ -13,11 +15,13 @@ import {
   faMoneyBill,
   faStar
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import * as actions from "../../store/actions/index";
+
 class Films extends Component {
   state = {
     films: [],
-    i: 0
+    i: 0,
+    showWarningMessage: false
   };
   componentDidMount() {
     const films = [];
@@ -98,26 +102,34 @@ class Films extends Component {
                   width: "120px",
                   lineHeight: "normal"
                 }}
-                clicked={() =>
-                  this.props.history.push({
-                    pathname: "/bookingDetails"
-                  })
-                }
               >
                 <FontAwesomeIcon icon={faPlus} /> More..
               </Button>
-              <Link to="/bookingDetails">
-                <Button
-                  style={{
-                    height: "40px",
-                    width: "120px",
-                    lineHeight: "normal"
-                  }}
-                  btnType="Black"
-                >
-                  <FontAwesomeIcon icon={faMoneyBill} /> BUY
-                </Button>
-              </Link>
+
+              <Button
+                clicked={() => {
+                  if (this.props.isAuth) {
+                    this.props.history.push({
+                      pathname: "/bookingDetails"
+                    });
+                  } else {
+                    this.props.onBookWithoutLogIn();
+                    this.setState({ showWarningMessage: true });
+                    setTimeout(
+                      () => this.setState({ showWarningMessage: false }),
+                      3000
+                    );
+                  }
+                }}
+                style={{
+                  height: "40px",
+                  width: "120px",
+                  lineHeight: "normal"
+                }}
+                btnType="Black"
+              >
+                <FontAwesomeIcon icon={faMoneyBill} /> BUY
+              </Button>
             </div>
           </div>
         </div>
@@ -135,8 +147,36 @@ class Films extends Component {
         </div>
       );
     }
+    let warningMessage = (
+      <div
+        style={{
+          position: "fixed",
+          width: "auto",
+          height: "auto",
+
+          transform: this.state.showWarningMessage
+            ? "translateY(0)"
+            : "translateY(-100vh)",
+          transition: "all 1s ease-out",
+          left: "50%",
+
+          backgroundColor: "#f44336",
+          zIndex: "500",
+          color: "white",
+          border: "1px solid #ccc",
+
+          textAlign: "center",
+          padding: "20px",
+          fontSize: "18px",
+          lineHeight: "20px"
+        }}
+      >
+        you must login to book a ticket
+      </div>
+    );
     return (
       <Auxiliary>
+        {this.state.showWarningMessage ? <div> {warningMessage}</div> : null}
         <div className={classes.gridContainer}>
           {poster}
 
@@ -177,5 +217,14 @@ class Films extends Component {
     );
   }
 }
-
-export default Films;
+const mapStateToProps = state => {
+  return {
+    isAuth: state.auth.token != null
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    onBookWithoutLogIn: () => dispatch(actions.showLogInForm())
+  };
+};
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Films));

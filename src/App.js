@@ -27,7 +27,7 @@ class App extends React.Component {
   }
   logOut = () => {
     if (!this.props.isAuth) {
-      this.setState({ showLogInForm: true });
+      this.props.onClickLogIn();
     } else {
       this.props.onLogOut();
     }
@@ -95,13 +95,13 @@ class App extends React.Component {
                 </a>
               </li>
               <li>
-                <a href="#home">Home</a>
+                <a href="/">Home</a>
               </li>
               <li onClick={this.logOut}>
                 {!this.props.isAuth ? (
-                  <a href="#login">LOGIN</a>
+                  <a href="#">LOGIN</a>
                 ) : (
-                  <a href="#logout">LOGOUT</a>
+                  <a href="/">LOGOUT</a>
                 )}
               </li>
               <li>
@@ -116,8 +116,8 @@ class App extends React.Component {
               {searchBar}
             </Modal>
             <Modal
-              show={this.state.showLogInForm}
-              clicked={() => this.setState({ showLogInForm: false })}
+              show={this.props.showLogInForm}
+              clicked={() => this.props.onClickDisappear()}
             >
               {logInForm}
             </Modal>
@@ -130,14 +130,17 @@ class App extends React.Component {
 }
 const mapStateToProps = state => {
   return {
-    isAuth: state.auth.token !== null
+    isAuth: state.auth.token !== null,
+    showLogInForm: state.auth.showLogInForm
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
     onLogOut: () => dispatch(actions.logout),
-    onTryAutoSignUp: () => dispatch(actions.authCheckState())
+    onTryAutoSignUp: () => dispatch(actions.authCheckState()),
+    onClickLogIn: () => dispatch(actions.showLogInForm()),
+    onClickDisappear: () => dispatch(actions.hideLogInForm())
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

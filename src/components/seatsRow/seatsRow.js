@@ -13,7 +13,8 @@ class seatsRow extends React.Component {
         this.props.date,
         this.props.time,
         this.props.film,
-        this.props.N
+        this.props.N,
+        console.log(localStorage.getItem("email"))
       );
       if (this.props.seats[this.props.N][parseInt(key)] != null) {
         if (
@@ -30,7 +31,8 @@ class seatsRow extends React.Component {
                   film: this.props.film,
                   N: this.props.N,
                   key,
-                  value: this.props.seats[this.props.N][key].value
+                  value: this.props.seats[this.props.N][key].value,
+                  email: localStorage.getItem("email")
                 })
               }
               className={`${classes.seat} ${classes.available} `}
@@ -45,16 +47,34 @@ class seatsRow extends React.Component {
         } else if (
           this.props.seats[this.props.N][parseInt(key)].status === "booked"
         ) {
-          return (
-            <div key={key} className={`${classes.seat} ${classes.booked} `}>
-              {" "}
-              {this.props.loading ? (
-                <Spinner2 />
-              ) : (
-                this.props.seats[this.props.N][key].value
-              )}
-            </div>
-          );
+          console.log(this.props.seats[this.props.N][parseInt(key)].email);
+          console.log(localStorage.getItem("email"));
+
+          if (
+            this.props.seats[this.props.N][parseInt(key)].email ===
+            localStorage.getItem("email")
+          ) {
+            return (
+              <div key={key} className={`${classes.seat} ${classes.booked} `}>
+                {" "}
+                {this.props.loading ? (
+                  <Spinner2 />
+                ) : (
+                  this.props.seats[this.props.N][key].value
+                )}
+              </div>
+            );
+          } else {
+            return (
+              <div
+                key={key}
+                className={`${classes.seat} ${classes.unavailable} `}
+              >
+                {" "}
+                {this.props.loading ? <Spinner2 /> : null}
+              </div>
+            );
+          }
         } else {
           return <div key={key} className={classes.space}></div>;
         }

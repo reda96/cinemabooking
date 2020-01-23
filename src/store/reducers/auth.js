@@ -6,9 +6,15 @@ const initialState = {
   userId: null,
   error: null,
   loading: false,
-  authRedirectPath: "/"
+  authRedirectPath: "/",
+  showLogInForm: false
 };
-
+const showLogInForm = (state, action) => {
+  return updateObject(state, { showLogInForm: true });
+};
+const hideLogInForm = (state, action) => {
+  return updateObject(state, { showLogInForm: false });
+};
 const setAuthRedirectPath = (state, action) => {
   return updateObject(state, { authRedirectPath: action.path });
 };
@@ -48,6 +54,10 @@ const reducer = (state = initialState, action) => {
       return authLogout(state, action);
     case actionTypes.SET_AUTH_REDIRECT_PATH:
       return setAuthRedirectPath(state, action);
+    case actionTypes.SHOW_LOGIN_FORM:
+      return showLogInForm(state, action);
+    case actionTypes.HIDE_LOGIN_FORM:
+      return hideLogInForm(state, action);
     default:
       return state;
   }

@@ -1,3 +1,25 @@
+.films {
+  animation: smooth 1s ease-in;
+}
+
+@keyframes smooth {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes smoothout {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .row {
   margin: 30px auto;
   max-width: 62.5rem;

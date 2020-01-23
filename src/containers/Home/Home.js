@@ -39,7 +39,8 @@ class Home extends Component {
       // }
     ],
     counter: 0,
-    selectedFilm: false
+    selectedFilm: false,
+    filmOpacity: false
   };
   componentDidMount() {
     this.props.onFetchFilms();
@@ -49,26 +50,43 @@ class Home extends Component {
   }
   handleRightShift = () => {
     if (this.props.counter < this.props.films.length - 1) {
-      this.props.onChoseFilm(this.props.counter + 1);
+      this.setState({ filmOpacity: false });
+      setTimeout(() => {
+        this.setState({ filmOpacity: true });
+        this.props.onChoseFilm(this.props.counter + 1);
+      }, 200);
     }
   };
   handleLeftShift = () => {
     if (this.props.counter > 0) {
-      this.props.onChoseFilm(this.props.counter - 1);
+      this.setState({ filmOpacity: false });
+      setTimeout(() => {
+        this.setState({ filmOpacity: true });
+        this.props.onChoseFilm(this.props.counter - 1);
+      }, 200);
     }
   };
   render() {
     let gridContainer = null;
     let films = null;
+
     if (this.props.films.length) {
       if (this.state.selectedFilm) {
         films = (
-          <Films
-            films={this.props.films}
-            rightShift={this.handleRightShift}
-            leftShift={this.handleLeftShift}
-            counter={this.props.counter}
-          />
+          <div
+            style={{
+              animation: this.state.filmOpacity
+                ? classes.smooth + " 1s ease-in"
+                : classes.smoothout + " 0.5s ease-out"
+            }}
+          >
+            <Films
+              films={this.props.films}
+              rightShift={this.handleRightShift}
+              leftShift={this.handleLeftShift}
+              counter={this.props.counter}
+            />
+          </div>
         );
       }
       gridContainer = (
@@ -77,8 +95,16 @@ class Home extends Component {
             <div key={film.id} className={classes.gridItem}>
               <Poster
                 clicked={() => {
-                  this.setState({ selectedFilm: true });
-                  this.props.onChoseFilm(film.id);
+                  if (this.state.selectedFilm) {
+                    this.setState({ filmOpacity: false });
+                    setTimeout(() => {
+                      this.setState({ filmOpacity: true });
+                      this.props.onChoseFilm(film.id);
+                    }, 200);
+                  } else {
+                    this.setState({ selectedFilm: true, filmOpacity: true });
+                    this.props.onChoseFilm(film.id);
+                  }
                 }}
                 imgUrl={imagesArray[film.id]}
                 width="300px"
@@ -103,6 +129,7 @@ class Home extends Component {
               margin: "0 auto",
               paddingTop: "30px"
             }}
+            className={classes.films}
           >
             {films}
           </div>
@@ -132,4 +159,4 @@ const mapStateToProps = state => {
     counter: state.films.chosenFilm
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));

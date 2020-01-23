@@ -100,7 +100,16 @@ export const bookSeatFail = error => {
     error: error
   };
 };
-export const bookSeat = ({ screenNumber, date, time, film, N, key, value }) => {
+export const bookSeat = ({
+  screenNumber,
+  date,
+  time,
+  film,
+  N,
+  key,
+  value,
+  email
+}) => {
   return dispatch => {
     dispatch(bookSeatStart());
     axios
@@ -141,7 +150,7 @@ export const bookSeat = ({ screenNumber, date, time, film, N, key, value }) => {
               "/" +
               key +
               ".json",
-            { status: "booked", value: value }
+            { status: "booked", value: value, email: email }
           )
           .then(res => {
             console.log(res);
