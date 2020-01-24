@@ -18,12 +18,6 @@
   padding-top: 2px;
   padding-bottom: 2px;
 }
-.Next .previous:hover {
-  background-color: #ad6608;
-}
-.Next .previous {
-  border-color: #df8d0b;
-}
 .Next {
   background-color: #f39c11;
   color: white;
@@ -35,9 +29,24 @@
   padding-top: 2px;
   padding-bottom: 2px;
 }
-.Next:hover {
-  background-color: #ad6608;
+
+.Cancel {
+  background-color: #e84c3d;
+  color: white;
+  float: left;
+  margin-right: 300px;
+  border-color: #e84c3d;
+  border-style: solid;
+  font-size: 15px;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
-.Next {
+.Cancel:hover {
+  background-color: #f12f1e;
+}
+.Next .previous:hover {
+  background-color: #db8e28;
+}
+.Next .previous {
   border-color: #df8d0b;
 }

@@ -6,7 +6,8 @@ import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import {
   faChevronLeft,
-  faChevronRight
+  faChevronRight,
+  faTimes
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../components/UI/Button/Button";
@@ -460,6 +461,9 @@ class Screen extends Component {
         </Button>
         <Button classes={classes.previous}>
           <FontAwesomeIcon icon={faChevronLeft} /> previous
+        </Button>
+        <Button classes={classes.Cancel}>
+          <FontAwesomeIcon icon={faTimes} /> cancel
         </Button>
       </div>
     );

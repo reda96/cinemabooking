@@ -3,7 +3,8 @@ import Input from "../../components/UI/Input/Input";
 import classes from "./UserInfo.css";
 import {
   faChevronRight,
-  faChevronLeft
+  faChevronLeft,
+  faTimes
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../components/UI/Button/Button";
@@ -58,6 +59,9 @@ class UserInfo extends Component {
         </Button>
         <Button classes={classes.previous}>
           <FontAwesomeIcon icon={faChevronLeft} /> previous
+        </Button>
+        <Button classes={classes.Cancel}>
+          <FontAwesomeIcon icon={faTimes} /> cancel
         </Button>
       </div>
     );

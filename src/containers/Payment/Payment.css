@@ -1,0 +1,44 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 10px;
+  grid-template-rows: 350px;
+  background-color: white;
+}
+
+.pricingTable {
+  display: block;
+  border: solid 1px #dddddd;
+  width: 300px;
+  cursor: pointer;
+
+  /* margin-top: 20px; */
+}
+img {
+  /* filter: url(filters.svg#grayscale); Firefox 3.5+ */
+  filter: gray; /* IE5+ */
+  -webkit-filter: grayscale(1); /* Webkit Nightlies & Chrome Canary */
+  -webkit-transition: all 0.8s ease-in-out;
+}
+
+img:hover {
+  filter: none;
+  -webkit-filter: grayscale(0);
+  -webkit-transform: scale(1.01);
+}
+
+.credit {
+  font-size: 30px;
+  background-color: #333333;
+  text-align: center;
+  color: white;
+}
+.price {
+  background-color: #f6f6f6;
+  color: #333333;
+  font-family: "Droid Arabic Naskh", Tahoma, Verdana, serif;
+  font-size: 2.28571rem;
+  font-weight: normal;
+
+  text-align: center;
+}

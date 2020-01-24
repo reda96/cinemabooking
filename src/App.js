@@ -3,6 +3,7 @@ import Layout from "./components/Layout/Layout";
 import "./App.css";
 import Home from "./containers/Home/Home";
 import Screen from "./containers/Screen/Screen";
+import Payment from "./containers/Payment/Payment";
 import BookingDetails from "./containers/BookingDeatails/BookingDetails";
 import UserInfo from "./containers/UserInfo/UserInfo";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
@@ -39,6 +40,7 @@ class App extends React.Component {
         <Route path="/screen" component={Screen} />
         <Route path="/bookingDetails" component={BookingDetails} />
         <Route path="/userInfo" component={UserInfo} />
+        <Route path="/payment" component={Payment} />
         <Route path="/" exact component={Home} />
         <Redirect to="/" />
       </Switch>
@@ -60,7 +62,7 @@ class App extends React.Component {
     let logInForm = <LOGIN />;
 
     return (
-      <div style={{ backgroundColor: "#D9D9D9", height: "100%" }}>
+      <div style={{ height: "100%" }}>
         <div className={classes.navBar}>
           <div className={classes.social}>
             <FontAwesomeIcon
@@ -126,7 +128,7 @@ class App extends React.Component {
             </Modal>
           </div>
         </div>
-        <div style={{ margin: "0 30px" }}>
+        <div style={{ backgroundColor: "#D9D9D9" }}>
           <Layout>{routes}</Layout>
         </div>
       </div>
