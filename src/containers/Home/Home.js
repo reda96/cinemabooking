@@ -9,7 +9,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 
 import Films from "../../components/Films/Films";
 
-import axios from "../../axios-orders";
+import Spinner from "../../components/UI/Spinner/Spinner";
 import imagesArray from "../../assets/images";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -67,7 +67,7 @@ class Home extends Component {
     }
   };
   render() {
-    let gridContainer = null;
+    let gridContainer = <Spinner />;
     let films = null;
 
     if (this.props.films.length) {
@@ -153,7 +153,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     films: state.films.films,
-    loading: state.films.loading,
+    loading: state.films.loading && state.screens.loading,
     counter: state.films.chosenFilm
   };
 };

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
-import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as actions from "../../store/actions/auth";
 import { connect } from "react-redux";
@@ -21,6 +21,17 @@ class LogIn extends Component {
           required: true,
           isEmail: true
         },
+        valid: false,
+        touched: false
+      },
+      userName: {
+        inputType: "input",
+        inputConfig: {
+          type: "userName",
+          placeholder: "Your Name"
+        },
+        value: "",
+        validation: {},
         valid: false,
         touched: false
       },
@@ -88,19 +99,30 @@ class LogIn extends Component {
 
     this.props.onAuth(
       this.state.controls.email.value,
+      this.state.controls.userName,
       this.state.controls.password.value,
       this.state.isSignUp
     );
     this.props.onHideLogInForm();
-    console.log(this.state.controls.email.value);
   };
   render() {
     const formElementsArray = [];
     for (let key in this.state.controls) {
-      formElementsArray.push({
-        id: key,
-        config: this.state.controls[key]
-      });
+      if (this.state.isSignUp) {
+        {
+          formElementsArray.push({
+            id: key,
+            config: this.state.controls[key]
+          });
+        }
+      } else {
+        if (!(this.state.controls[key].inputConfig.type === "userName")) {
+          formElementsArray.push({
+            id: key,
+            config: this.state.controls[key]
+          });
+        }
+      }
     }
     let form = formElementsArray.map(formElement => (
       <div
@@ -114,6 +136,11 @@ class LogIn extends Component {
         {formElement.config.inputConfig.type === "email" ? (
           <FontAwesomeIcon
             icon={faEnvelope}
+            style={{ marginTop: "8px", width: "35px", height: "35px" }}
+          />
+        ) : formElement.config.inputConfig.type === "userName" ? (
+          <FontAwesomeIcon
+            icon={faUser}
             style={{ marginTop: "8px", width: "35px", height: "35px" }}
           />
         ) : (
@@ -160,8 +187,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    onAuth: (email, password, isSignUp) =>
-      dispatch(actions.auth(email, password, isSignUp)),
+    onAuth: (email, userName, password, isSignUp) =>
+      dispatch(actions.auth(email, userName, password, isSignUp)),
     onSetAuhRedirectPath: () => dispatch(actions.setAuthRedirectPath("/")),
     onHideLogInForm: () => dispatch(actions.hideLogInForm())
   };

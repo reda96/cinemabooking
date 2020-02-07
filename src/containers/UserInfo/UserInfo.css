@@ -7,6 +7,17 @@
   color: #25a9df;
   font-weight: bold;
 }
+.Next {
+  background-color: #f39c11;
+  color: white;
+  float: right;
+
+  border-color: #df8d0b;
+  border-style: solid;
+  font-size: 15px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
 .previous {
   background-color: #f39c11;
   color: white;
@@ -18,23 +29,11 @@
   padding-top: 2px;
   padding-bottom: 2px;
 }
-.Next {
-  background-color: #f39c11;
-  color: white;
-  float: right;
-  margin-right: 300px;
-  border-color: #df8d0b;
-  border-style: solid;
-  font-size: 15px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-}
-
 .Cancel {
   background-color: #e84c3d;
   color: white;
   float: left;
-  margin-right: 300px;
+
   border-color: #e84c3d;
   border-style: solid;
   font-size: 15px;
@@ -44,8 +43,9 @@
 .Cancel:hover {
   background-color: #f12f1e;
 }
-.Next .previous:hover {
-  background-color: #db8e28;
+.Next:hover,
+.previous:hover {
+  background-color: #d38014;
 }
 .Next .previous {
   border-color: #df8d0b;

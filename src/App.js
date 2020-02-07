@@ -104,13 +104,18 @@ class App extends React.Component {
               </li>
               <li onClick={this.logOut}>
                 {!this.props.isAuth ? (
-                  <a href="#">LOGIN</a>
+                  <a href="#">logIn</a>
                 ) : (
-                  <a href="/">LOGOUT</a>
+                  <a href="/">LogOut</a>
                 )}
               </li>
               <li>
                 <a href="#about">About</a>
+              </li>
+              <li style={{ float: "left" }}>
+                <a>
+                  {this.props.isAuth ? localStorage.getItem("userName") : null}{" "}
+                </a>
               </li>
             </ul>
             <Modal

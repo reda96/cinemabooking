@@ -14,17 +14,13 @@
 
   /* margin-top: 20px; */
 }
-img {
+img.image {
   /* filter: url(filters.svg#grayscale); Firefox 3.5+ */
-  filter: gray; /* IE5+ */
-  -webkit-filter: grayscale(1); /* Webkit Nightlies & Chrome Canary */
-  -webkit-transition: all 0.8s ease-in-out;
+  filter: grayscale(100%); /* IE5+ */
 }
 
 img:hover {
-  filter: none;
-  -webkit-filter: grayscale(0);
-  -webkit-transform: scale(1.01);
+  filter: grayscale(0%);
 }
 
 .credit {
@@ -41,4 +37,47 @@ img:hover {
   font-weight: normal;
 
   text-align: center;
+}
+.Next {
+  background-color: #f39c11;
+  color: white;
+  float: right;
+
+  border-color: #df8d0b;
+  border-style: solid;
+  font-size: 15px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.previous {
+  background-color: #f39c11;
+  color: white;
+  float: left;
+
+  border-color: #df8d0b;
+  border-style: solid;
+  font-size: 15px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.Cancel {
+  background-color: #e84c3d;
+  color: white;
+  float: left;
+
+  border-color: #e84c3d;
+  border-style: solid;
+  font-size: 15px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.Cancel:hover {
+  background-color: #f12f1e;
+}
+.Next:hover,
+.previous:hover {
+  background-color: #d38014;
+}
+.Next .previous {
+  border-color: #df8d0b;
 }

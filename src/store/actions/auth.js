@@ -20,6 +20,7 @@ export const logout = () => {
   localStorage.removeItem("expirationDate");
   localStorage.removeItem("localId");
   localStorage.removeItem("email");
+  localStorage.removeItem("userName");
   return { type: actionTypes.AUTH_LOGOUT };
 };
 export const checkAuthTimeout = expirationTime => {
@@ -29,7 +30,7 @@ export const checkAuthTimeout = expirationTime => {
     }, expirationTime * 1000);
   };
 };
-export const auth = (email, password, isSignUp) => {
+export const auth = (email, userName, password, isSignUp) => {
   return dispatch => {
     dispatch(authStart());
     const authData = {
@@ -42,6 +43,24 @@ export const auth = (email, password, isSignUp) => {
     if (!isSignUp) {
       url =
         "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCFElpYjOYCRQ0k204XnYH6g_dn0ogx8BI";
+      axios
+        .get("https://cinemabooking-12d1c.firebaseio.com/users.json")
+        .then(res => {
+          Object.keys(res.data).map(key => {
+            if (res.data[key].email === authData.email) {
+              userName = res.data[key].userName.value;
+            }
+          });
+        });
+    } else {
+      axios
+        .post("https://cinemabooking-12d1c.firebaseio.com/users.json", {
+          userName: userName,
+          email: email
+        })
+        .then(res => {
+          console.log(res);
+        });
     }
     axios
       .post(url, authData)
@@ -55,6 +74,7 @@ export const auth = (email, password, isSignUp) => {
         localStorage.setItem("token", res.data.idToken);
         localStorage.setItem("localId", res.data.localId);
         localStorage.setItem("email", authData.email);
+        localStorage.setItem("userName", userName);
         dispatch(authSuccess(res.data.idToken, res.data.localId));
         dispatch(checkAuthTimeout(res.data.expiresIn));
       })

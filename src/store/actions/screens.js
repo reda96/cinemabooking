@@ -35,45 +35,44 @@ export const fetchScreens = ({ date, time, screen }) => {
         }
 
         if (screen == 0) {
-          for (let i = 0; i < fetchedScreens[0][0].length; i++) {
+          Object.keys(fetchedScreens[0][0]).map(key => {
             if (
-              fetchedScreens[0][0][i].Date == date &&
-              fetchedScreens[0][0][i].time == time
+              fetchedScreens[0][0][key].Date == date &&
+              fetchedScreens[0][0][key].time == time
             ) {
-              seats = fetchedScreens[0][0][i].seats;
+              seats = fetchedScreens[0][0][key].seats;
             }
-          }
+          });
         }
         if (screen == 1) {
-          for (let i = 0; i < fetchedScreens[0][1].length; i++) {
+          Object.keys(fetchedScreens[0][1]).map(key => {
             if (
-              fetchedScreens[0][0][i].Date == date &&
-              fetchedScreens[0][1][i].time === time
+              fetchedScreens[0][0][key].Date == date &&
+              fetchedScreens[0][1][key].time === time
             ) {
-              seats = fetchedScreens[0][1][i].seats;
+              seats = fetchedScreens[0][1][key].seats;
             }
-          }
+          });
         }
         if (screen === 2) {
-          for (let i = 0; i < fetchedScreens[0][2].length; i++) {
+          Object.keys(fetchedScreens[0][2]).map(key => {
             if (
-              fetchedScreens[0][0][i].Date == date &&
-              fetchedScreens[0][2][i].time === time
+              fetchedScreens[0][0][key].Date == date &&
+              fetchedScreens[0][2][key].time === time
             ) {
-              seats = fetchedScreens[0][2][i].seats;
-              console.log(seats);
+              seats = fetchedScreens[0][2][key].seats;
             }
-          }
+          });
         }
         if (screen === 3) {
-          for (let i = 0; i < fetchedScreens[0][3].length; i++) {
+          Object.keys(fetchedScreens[0][0]).map(key => {
             if (
-              fetchedScreens[0][0][i].Date == date &&
-              fetchedScreens[0][3][i].time === time
+              fetchedScreens[0][0][key].Date == date &&
+              fetchedScreens[0][3][key].time === time
             ) {
-              seats = fetchedScreens[0][3][i].seats;
+              seats = fetchedScreens[0][3][key].seats;
             }
-          }
+          });
         }
         dispatch(fetchScreensSuccess(seats));
       })
@@ -82,16 +81,18 @@ export const fetchScreens = ({ date, time, screen }) => {
       });
   };
 };
+
 export const bookSeatStart = () => {
   return {
     type: actionTypes.BOOK_SEAT_START,
     loading: true
   };
 };
-export const bookSeatSuccess = seats => {
+export const bookSeatSuccess = (seats, reservationDetails) => {
   return {
     type: actionTypes.BOOK_SEAT_SUCCESS,
-    seats: seats
+    seats: seats,
+    reservationDetails: reservationDetails
   };
 };
 export const bookSeatFail = error => {
@@ -100,6 +101,7 @@ export const bookSeatFail = error => {
     error: error
   };
 };
+
 export const bookSeat = ({
   screenNumber,
   date,
@@ -108,7 +110,8 @@ export const bookSeat = ({
   N,
   key,
   value,
-  email
+  email,
+  reservationDetails
 }) => {
   return dispatch => {
     dispatch(bookSeatStart());
@@ -117,7 +120,6 @@ export const bookSeat = ({
       .then(res => {
         let fetchedScreens = [];
         fetchedScreens = res.data;
-        console.log(date + " " + time + " " + film + " " + screenNumber);
 
         let index = -1;
         Object.keys(fetchedScreens["-LyA4Sdi8S2klq_CVN8P"][screenNumber]).map(
@@ -154,6 +156,18 @@ export const bookSeat = ({
           )
           .then(res => {
             console.log(res);
+
+            reservationDetails.push({
+              screenNumber: screenNumber,
+              date: date,
+              time: time,
+              film: film,
+              N: N,
+              key: key,
+              index: index,
+              value: value,
+              email
+            });
             axios
               .get(
                 "screens/-LyA4Sdi8S2klq_CVN8P/" +
@@ -163,7 +177,7 @@ export const bookSeat = ({
                   "/seats.json"
               )
               .then(res => {
-                dispatch(bookSeatSuccess(res.data));
+                dispatch(bookSeatSuccess(res.data, reservationDetails));
               });
           })
           .catch(err => {
@@ -173,6 +187,73 @@ export const bookSeat = ({
       .catch(err => {
         dispatch(bookSeatFail(err));
       });
+  };
+};
+
+export const cancelBookingStart = () => {
+  return {
+    type: actionTypes.CANCEL_BOOKING_START,
+    loading: true
+  };
+};
+export const cancelBookingSuccess = seats => {
+  return {
+    type: actionTypes.CANCEL_BOOKING_SUCCESS,
+    seats: seats
+  };
+};
+export const cancelBookingFail = error => {
+  return {
+    type: actionTypes.CANCEL_BOOKING_FAIL,
+    error: error
+  };
+};
+
+export const cancelBooking = reservationDetails => {
+  return dispatch => {
+    dispatch(cancelBookingStart());
+    console.log(reservationDetails.length);
+
+    for (let i = 0; i < reservationDetails.length; i++) {
+      axios
+        .put(
+          "screens/-LyA4Sdi8S2klq_CVN8P/" +
+            reservationDetails[i].screenNumber +
+            "/" +
+            reservationDetails[i].index +
+            "/seats" +
+            "/" +
+            reservationDetails[i].N +
+            "/" +
+            reservationDetails[i].key +
+            ".json",
+          { status: "available", value: reservationDetails[i].value }
+        )
+        .then(res => {
+          console.log(res);
+
+          axios
+            .get(
+              "screens/-LyA4Sdi8S2klq_CVN8P/" +
+                reservationDetails[0].screenNumber +
+                "/" +
+                reservationDetails[0].index +
+                "/seats.json"
+            )
+            .then(res => {
+              if (i == reservationDetails.length - 1) {
+                dispatch(cancelBookingSuccess(res.data));
+              }
+              console.log(res.data);
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   };
 };
 export const choosenScreen = choosenScreen => {

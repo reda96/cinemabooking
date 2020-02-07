@@ -139,21 +139,22 @@ li {
   float: right;
 }
 
-li a {
+.navbar li a {
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 
   cursor: pointer;
-  color: #dddddd;
-  text-transform: uppercase;
-  font-family: FSAlbert, Cairo;
+  color: #aaaaaa;
+  text-transform: none;
+  font-family: Cairo;
   font-weight: 700;
   font-size: 18px;
 }
 
-li a:hover {
-  background-color: hsla(0, 0%, 82%, 0.014);
+.navbar li a:hover {
+  background-color: #888888;
+  color: #222222;
 }
 
 .Input {

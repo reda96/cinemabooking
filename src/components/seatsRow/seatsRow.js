@@ -4,18 +4,7 @@ import Spinner2 from "../UI/Spinner/Spinner2";
 import { connect } from "react-redux";
 class seatsRow extends React.Component {
   render() {
-    // console.log();
-
-    // this.props.seats[this.props.N].splice(0, 1);
     return Object.keys(this.props.seats[this.props.N]).map(key => {
-      console.log(
-        this.props.screenNumber,
-        this.props.date,
-        this.props.time,
-        this.props.film,
-        this.props.N,
-        console.log(localStorage.getItem("email"))
-      );
       if (this.props.seats[this.props.N][parseInt(key)] != null) {
         if (
           this.props.seats[this.props.N][parseInt(key)].status === "available"
@@ -30,9 +19,10 @@ class seatsRow extends React.Component {
                   time: this.props.time,
                   film: this.props.film,
                   N: this.props.N,
-                  key,
+                  key: key,
                   value: this.props.seats[this.props.N][key].value,
-                  email: localStorage.getItem("email")
+                  email: localStorage.getItem("email"),
+                  reservationDetails: this.props.reservationDetails
                 })
               }
               className={`${classes.seat} ${classes.available} `}
@@ -47,9 +37,6 @@ class seatsRow extends React.Component {
         } else if (
           this.props.seats[this.props.N][parseInt(key)].status === "booked"
         ) {
-          console.log(this.props.seats[this.props.N][parseInt(key)].email);
-          console.log(localStorage.getItem("email"));
-
           if (
             this.props.seats[this.props.N][parseInt(key)].email ===
             localStorage.getItem("email")
@@ -85,7 +72,8 @@ class seatsRow extends React.Component {
 const mapStateToProps = state => {
   return {
     loading: state.screens.loading,
-    seats: state.screens.seats
+    seats: state.screens.seats,
+    reservationDetails: state.screens.reservationDetails
   };
 };
 export default connect(mapStateToProps)(seatsRow);

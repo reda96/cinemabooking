@@ -13,6 +13,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../components/UI/Button/Button";
 class Screen extends Component {
   state = {
+    reservations: [],
     fetchedTimes: [],
     screens: [],
     seats: {
@@ -248,9 +249,13 @@ class Screen extends Component {
       screen: this.props.selectedScreen
     });
   }
+  componentDidUpdate() {}
 
   render() {
+    console.log(this.props.reservations.length);
+
     let Screen = <Spinner />;
+    console.log(this.props.seats);
 
     if (Object.keys(this.props.seats).length > 0) {
       Screen = (
@@ -444,27 +449,36 @@ class Screen extends Component {
         </div>
         {Screen}
 
-        <hr style={{ width: "800px", marginTop: "40px" }}></hr>
-        <Button
-          classes={classes.Next}
-          //   clicked={() => {
-          //     this.props.onChoosenDetails({
-          //       date: this.state.date,
-          //       time: this.state.time,
-          //       screen: this.state.screen,
-          //       filmName: this.props.films[this.props.counter].name
-          //     });
-          //     this.props.history.replace("/screen");
-          //   }}
-        >
-          next <FontAwesomeIcon icon={faChevronRight} />
-        </Button>
-        <Button classes={classes.previous}>
-          <FontAwesomeIcon icon={faChevronLeft} /> previous
-        </Button>
-        <Button classes={classes.Cancel}>
-          <FontAwesomeIcon icon={faTimes} /> cancel
-        </Button>
+        <hr style={{ marginTop: "40px" }}></hr>
+        <div>
+          <Button
+            classes={classes.Next}
+            disabled={this.props.reservations.length > 0 ? false : true}
+            clicked={() => this.props.history.replace("/userInfo")}
+          >
+            next <FontAwesomeIcon icon={faChevronRight} />
+          </Button>
+
+          <Button
+            classes={classes.previous}
+            clicked={() => {
+              this.props.onCancel(this.props.reservations);
+              this.props.history.replace("/");
+            }}
+          >
+            <FontAwesomeIcon icon={faChevronLeft} /> previous
+          </Button>
+          <Button
+            classes={classes.Cancel}
+            clicked={() => {
+              console.log(this.props.reservations);
+              this.props.onCancel(this.props.reservations);
+              this.props.history.replace("/");
+            }}
+          >
+            <FontAwesomeIcon icon={faTimes} /> cancel
+          </Button>
+        </div>
       </div>
     );
   }
@@ -475,17 +489,15 @@ const mapStateToProps = state => {
     selectedTime: state.bookingDetails.time,
     selectedScreen: state.bookingDetails.screen,
     selectedDate: state.bookingDetails.date,
-    seats: state.screens.seats
+    seats: state.screens.seats,
+    reservations: state.screens.reservationDetails
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    onFetchScreen: details => {
-      dispatch(actions.fetchScreens(details));
-    },
-    onBookSeat: details => {
-      dispatch(actions.bookSeat(details));
-    }
+    onFetchScreen: details => dispatch(actions.fetchScreens(details)),
+    onBookSeat: details => dispatch(actions.bookSeat(details)),
+    onCancel: details => dispatch(actions.cancelBooking(details))
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Screen);
