@@ -54,6 +54,14 @@
 .stages :first-child.circle::before {
   height: 0;
 }
+
+.fontawesome {
+  margin-top: 10px;
+  color: #45c9ff;
+}
+.stages :first-child.circle .fontawesome {
+  color: #45c9ff;
+}
 .screenText {
   width: 70%;
   background-color: #25a9df;

@@ -11,7 +11,8 @@ import {
   faFilm,
   faCalendar,
   faClock,
-  faMoneyBill
+  faMoneyBill,
+  faCheck
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../components/UI/Button/Button";
@@ -452,9 +453,12 @@ class Screen extends Component {
                 }}
               >
                 <div className={classes.circle}>
+                  <FontAwesomeIcon
+                    icon={faCheck}
+                    className={classes.fontawesome}
+                  />
                   <p
                     style={{
-                      marginTop: "35px",
                       marginLeft: "-10px",
 
                       fontSize: "10px"

@@ -1,20 +1,106 @@
 import React, { Component } from "react";
 import Input from "../../components/UI/Input/Input";
 import classes from "./UserInfo.css";
+
 import {
-  faChevronRight,
   faChevronLeft,
-  faTimes
+  faChevronRight,
+  faTimes,
+  faFilm,
+  faCalendar,
+  faClock,
+  faMoneyBill,
+  faCheck,
+  faTicketAlt
 } from "@fortawesome/free-solid-svg-icons";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../components/UI/Button/Button";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
+
 class UserInfo extends Component {
   state = {};
   render() {
     return (
-      <div>
+      <div className={classes.row}>
+        <div className={classes.reservationDetails}>
+          <div style={{ float: "left", color: "#ffffff" }}>
+            <FontAwesomeIcon icon={faFilm} />
+            {this.props.filmName}
+            {"| "} <FontAwesomeIcon icon={faCalendar} /> {this.props.filmDate}
+            {"| "} <FontAwesomeIcon icon={faClock} /> {this.props.filmTime}
+            {"| "}
+            <FontAwesomeIcon icon={faTicketAlt} />{" "}
+            {this.props.reservations.length}
+          </div>
+          <div>
+            <div style={{ paddingTop: "40px" }} />
+            <div>
+              <div
+                className={classes.stages}
+                style={{
+                  width: "450px",
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr 1fr 1fr"
+                }}
+              >
+                <div className={classes.circle}>
+                  <FontAwesomeIcon
+                    icon={faCheck}
+                    className={classes.fontawesome}
+                  />
+                  <p
+                    style={{
+                      marginLeft: "-10px",
+
+                      fontSize: "10px"
+                    }}
+                  >
+                    SEATING
+                  </p>
+                </div>
+                <div className={classes.circle}>
+                  <p
+                    style={{
+                      marginTop: "35px",
+                      marginLeft: "-10px",
+
+                      fontSize: "10px"
+                    }}
+                  >
+                    USERINFO
+                  </p>
+                </div>
+                <div className={classes.circle}>
+                  <p
+                    style={{
+                      marginTop: "35px",
+                      marginLeft: "-10px",
+                      color: "#efefef",
+                      fontSize: "10px"
+                    }}
+                  >
+                    PAYMENT
+                  </p>
+                </div>
+                <div className={classes.circle}>
+                  <p
+                    style={{
+                      marginTop: "35px",
+                      marginLeft: "-10px",
+                      color: "#efefef",
+                      fontSize: "10px"
+                    }}
+                  >
+                    MONEY COLLECTION
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <h1 className={classes.sectionTitle}>User Information</h1>
         <table>
           <tbody>

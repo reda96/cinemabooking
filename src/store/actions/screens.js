@@ -256,6 +256,40 @@ export const cancelBooking = reservationDetails => {
     }
   };
 };
+
+export const confirmReservationStart = () => {
+  return {
+    type: actionTypes.CONFIRM_RESERVATION_START,
+    loading: true
+  };
+};
+export const confirmReservationSuccess = () => {
+  return {
+    type: actionTypes.CONFIRM_RESERVATION_SUCCESS
+  };
+};
+export const confirmReservationFail = error => {
+  return {
+    type: actionTypes.CONFIRM_RESERVATION_FAIL,
+    error: error
+  };
+};
+export const confirmReservation = reservation => {
+  return dispatch => {
+    dispatch(confirmReservationStart());
+
+    axios
+      .post("./reservation.json", reservation)
+      .then(res => {
+        console.log(res);
+        dispatch(confirmReservationSuccess(res.data));
+      })
+      .catch(err => {
+        console.log(err);
+        confirmReservationFail();
+      });
+  };
+};
 export const choosenScreen = choosenScreen => {
   return {
     type: actionTypes.CHOOSE_FILM,

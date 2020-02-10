@@ -1,6 +1,11 @@
 export { fetchFilms, chooseFilm } from "./films";
 export { fetchTimes, choosenDetails } from "./bookingDetails";
-export { fetchScreens, bookSeat, cancelBooking } from "./screens";
+export {
+  fetchScreens,
+  bookSeat,
+  cancelBooking,
+  confirmReservation
+} from "./screens";
 export {
   auth,
   logout,
