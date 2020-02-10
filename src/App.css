@@ -43,8 +43,9 @@
   margin-right: 30px;
 }
 .navBar {
-  height: 60px;
+  height: 50px;
   background-color: #555555;
+  justify-content: center;
 }
 @media (max-width: 500px) {
   .navBar {
@@ -106,8 +107,7 @@
 }
 
 .navbar {
-  padding: 0px;
-  margin: 0px;
+  left: "left";
 }
 ul {
   list-style-type: none;

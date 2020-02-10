@@ -8,6 +8,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../components/UI/Button/Button";
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/index";
 class Payment extends Component {
   state = {};
   render() {
@@ -34,22 +36,27 @@ class Payment extends Component {
         <hr></hr>
         <Button
           classes={classes.Next}
-          //   clicked={() => {
-          //     this.props.onChoosenDetails({
-          //       date: this.state.date,
-          //       time: this.state.time,
-          //       screen: this.state.screen,
-          //       filmName: this.props.films[this.props.counter].name
-          //     });
-          //     this.props.history.replace("/screen");
-          //   }}
+          disabled={this.props.reservations.length > 0 ? false : true}
+          clicked={() => this.props.history.replace("/")}
         >
           next <FontAwesomeIcon icon={faChevronRight} />
         </Button>
-        <Button classes={classes.previous}>
+        <Button
+          classes={classes.previous}
+          clicked={() => {
+            this.props.onCancel(this.props.reservations);
+            this.props.history.replace("/");
+          }}
+        >
           <FontAwesomeIcon icon={faChevronLeft} /> previous
         </Button>
-        <Button classes={classes.Cancel}>
+        <Button
+          classes={classes.Cancel}
+          clicked={() => {
+            this.props.onCancel(this.props.reservations);
+            this.props.history.replace("/");
+          }}
+        >
           <FontAwesomeIcon icon={faTimes} /> cancel
         </Button>
       </div>
@@ -57,4 +64,14 @@ class Payment extends Component {
   }
 }
 
-export default Payment;
+const mapStateToProps = state => {
+  return {
+    reservations: state.screens.reservationDetails
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    onCancel: details => dispatch(actions.cancelBooking(details))
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Payment);

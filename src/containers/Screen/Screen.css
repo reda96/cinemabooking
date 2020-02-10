@@ -1,7 +1,58 @@
 .row {
-  margin: 0 auto;
+  margin: 0 200px;
   max-width: 1000px;
   width: 100%;
+}
+@media (max-width: 1000px) {
+  .row {
+    margin: 0 50px;
+  }
+}
+.reservationDetails {
+  background-color: #757374;
+  height: 125px;
+  width: 100%;
+}
+.stages {
+  margin-left: 300px;
+  padding: 0;
+  font-size: 80%;
+  width: 100%;
+  text-transform: uppercase;
+  background-color: #757374;
+}
+
+.circle {
+  display: inline-block;
+  background: #efefef;
+  margin-right: 60px;
+  text-align: center;
+
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.circle::before {
+  position: relative;
+  display: block;
+
+  top: 15px;
+  width: 275%;
+  height: 2px;
+  content: "";
+  right: 275%;
+  background-color: #efefef;
+  color: "#efefef";
+}
+.stages :first-child.circle {
+  background-color: #45c9ff;
+}
+.stages :first-child.circle p {
+  color: #45c9ff;
+}
+.stages :first-child.circle::before {
+  height: 0;
 }
 .screenText {
   width: 70%;
@@ -27,6 +78,7 @@
   height: 100px;
   text-align: center;
   padding-top: 20px;
+  margin-top: 20px;
 }
 
 .seatingSamples {

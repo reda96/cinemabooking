@@ -82,57 +82,49 @@ class App extends React.Component {
               className={`${classes.FontAwesomeIcon} ${classes.youtube}`}
             />
           </div>
-        </div>
-        <div className={classes.main}>
-          <div
-            style={{
-              height: "50px",
-              overflow: "visible",
-              boxShadow: "0 2px 4px 0",
-              width: "100%",
-              backgroundColor: "#555555"
-            }}
-          >
-            <ul className={classes.navbar}>
-              <li onClick={() => this.setState({ showSearchBar: true })}>
-                <a>
-                  <FontAwesomeIcon icon={faSearch} />
-                </a>
-              </li>
-              <li>
-                <a href="/">Home</a>
-              </li>
-              <li onClick={this.logOut}>
-                {!this.props.isAuth ? (
-                  <a href="#">logIn</a>
-                ) : (
-                  <a href="/">LogOut</a>
-                )}
-              </li>
-              <li>
-                <a href="#about">About</a>
-              </li>
-              <li style={{ float: "left" }}>
-                <a>
-                  {this.props.isAuth ? localStorage.getItem("userName") : null}{" "}
-                </a>
-              </li>
-            </ul>
-            <Modal
-              show={this.state.showSearchBar}
-              clicked={() => this.setState({ showSearchBar: false })}
-            >
-              {" "}
-              {searchBar}
-            </Modal>
-            <Modal
-              show={this.props.showLogInForm}
-              clicked={() => this.props.onClickDisappear()}
-            >
-              {logInForm}
-            </Modal>
+
+          <ul className={classes.navbar}>
+            <li onClick={() => this.setState({ showSearchBar: true })}>
+              <a>
+                <FontAwesomeIcon icon={faSearch} />
+              </a>
+            </li>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li style={{ float: "left" }} onClick={this.logOut}>
+              {!this.props.isAuth ? (
+                <a href="#">logIn</a>
+              ) : (
+                <a href="/">LogOut</a>
+              )}
+            </li>
+
+            <li style={{ float: "left" }}>
+              <a>
+                {this.props.isAuth ? localStorage.getItem("userName") : null}{" "}
+              </a>
+            </li>
+          </ul>
+          <div className={classes.main}>
+            <div>
+              <Modal
+                show={this.state.showSearchBar}
+                clicked={() => this.setState({ showSearchBar: false })}
+              >
+                {" "}
+                {searchBar}
+              </Modal>
+              <Modal
+                show={this.props.showLogInForm}
+                clicked={() => this.props.onClickDisappear()}
+              >
+                {logInForm}
+              </Modal>
+            </div>
           </div>
         </div>
+
         <div style={{ backgroundColor: "#D9D9D9" }}>
           <Layout>{routes}</Layout>
         </div>

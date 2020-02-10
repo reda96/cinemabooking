@@ -7,7 +7,11 @@ import * as actions from "../../store/actions/index";
 import {
   faChevronLeft,
   faChevronRight,
-  faTimes
+  faTimes,
+  faFilm,
+  faCalendar,
+  faClock,
+  faMoneyBill
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../components/UI/Button/Button";
@@ -424,6 +428,82 @@ class Screen extends Component {
     }
     return (
       <div className={classes.row}>
+        <div className={classes.reservationDetails}>
+          <div style={{ float: "left", color: "#ffffff" }}>
+            <FontAwesomeIcon icon={faFilm} />
+            {this.props.filmName}
+            {"| "} <FontAwesomeIcon icon={faCalendar} />
+            {this.props.filmDate}
+            {"| "} <FontAwesomeIcon icon={faClock} />
+            {this.props.filmTime}
+            {"| "}
+            <FontAwesomeIcon icon={faMoneyBill} />
+            {this.props.reservations.length * 60}
+          </div>
+          <div>
+            <div style={{ paddingTop: "40px" }} />
+            <div>
+              <div
+                className={classes.stages}
+                style={{
+                  width: "450px",
+                  display: "grid",
+                  gridTemplateColumns: "1fr 1fr 1fr 1fr"
+                }}
+              >
+                <div className={classes.circle}>
+                  <p
+                    style={{
+                      marginTop: "35px",
+                      marginLeft: "-10px",
+
+                      fontSize: "10px"
+                    }}
+                  >
+                    SEATING
+                  </p>
+                </div>
+                <div className={classes.circle}>
+                  <p
+                    style={{
+                      marginTop: "35px",
+                      marginLeft: "-10px",
+                      color: "#efefef",
+                      fontSize: "10px"
+                    }}
+                  >
+                    USERINFO
+                  </p>
+                </div>
+                <div className={classes.circle}>
+                  <p
+                    style={{
+                      marginTop: "35px",
+                      marginLeft: "-10px",
+                      color: "#efefef",
+                      fontSize: "10px"
+                    }}
+                  >
+                    PAYMENT
+                  </p>
+                </div>
+                <div className={classes.circle}>
+                  <p
+                    style={{
+                      marginTop: "35px",
+                      marginLeft: "-10px",
+                      color: "#efefef",
+                      fontSize: "10px"
+                    }}
+                  >
+                    MONEY COLLECTION
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className={classes.seatingMessage}>2D with intermission</div>
         <div className={classes.seatingSamples}>
           <ul className={classes.list}>
@@ -490,7 +570,10 @@ const mapStateToProps = state => {
     selectedScreen: state.bookingDetails.screen,
     selectedDate: state.bookingDetails.date,
     seats: state.screens.seats,
-    reservations: state.screens.reservationDetails
+    reservations: state.screens.reservationDetails,
+    filmName: state.bookingDetails.filmName,
+    filmDate: state.bookingDetails.date,
+    filmTime: state.bookingDetails.time
   };
 };
 const mapDispatchToProps = dispatch => {
